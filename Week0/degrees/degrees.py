@@ -91,6 +91,7 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
+    
     start = Node(source, None, None) # Create a Node for the starting person
     goal = Node(target, None, None) # Create a Node for the ending person
     frontier = QueueFrontier() # Create frontier to store Nodes
@@ -121,7 +122,7 @@ def shortest_path(source, target):
                     return shortestPath[::-1]
                 # Lastly, if the frontier doesn't already contain the node, we add it to both the frontier
                 # and the explored Nodes.
-                elif not frontier.contains_state(neighborsNode.state):
+                else:
                     frontier.add(neighborsNode)
                     exploredNodes.add(neighborsNode)
     
