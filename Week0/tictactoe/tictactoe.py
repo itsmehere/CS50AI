@@ -39,6 +39,8 @@ def player(board):
             elif cell is O:
                 numOs += 1
 
+    # It is X's turn when the board is empty or when the number of X's on the board
+    # equal the number of O's on the board(assuming X plays first).
     if numEmpty == 9 or numXs == numOs:
         return X
     else:
@@ -140,6 +142,7 @@ def winner(board):
     elif numOs == 3:
         return O
 
+    #TR -> BL
     numOs = 0
     numXs = 0
     index = 2
@@ -195,6 +198,12 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+    # HOW IT WORKS:
+    # Determine whose turn it is. If it's X's turn, get the maximum score possible given 
+    # what O(the minimum player) will do. If it's O's turn, get the minimum possible score
+    # given what X(the maximum player) will do. Recursively do this until the game is ended
+    # at which point you can decide what the optimal move would be.
+
     if terminal(board):
         return NONE
 
