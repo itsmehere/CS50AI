@@ -1,6 +1,6 @@
 # TicTacToe
 
-A basic artificial intelligence approach using the minimax algorithm.
+A basic artificial intelligence approach to tictactoe using the minimax algorithm.
 
 ## Installation
 
@@ -13,8 +13,8 @@ pip3 install -r requirements.txt
 ## Usage
 
 There are two main files in this project: `runner.py` and `tictactoe.py`. `tictactoe.py` contains all the logic
-for selecting the optimal move.
+for selecting the optimal move. To run the program, use the command: `python runner.py`.
 
-## From CS50
+## Additional Info
 
-[cs50](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)
+For more information, visit [CS50](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/).
