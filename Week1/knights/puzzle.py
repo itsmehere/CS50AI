@@ -17,7 +17,7 @@ knowledge0 = And(
     Not(And(AKnight, AKnave)),
 
     # A says:
-    Implication(AKnight, And(AKnight, AKnave))
+    Biconditional(AKnight, And(AKnight, AKnave))
 )
 
 # Puzzle 1
@@ -48,11 +48,11 @@ knowledge2 = And(
     Or(BKnight, BKnave),
     Not(And(BKnight, BKnave)),
 
-    # A says:
-    Implication(Or(And(AKnight, BKnight), And(AKnave, BKnave)), And(AKnight, BKnight)),
+    # A: If A is telling the truth, then A is a Knight and A & B are of the same kind.
+    Biconditional(Or(And(AKnight, BKnight), And(AKnave, BKnave)), AKnight),
 
-    # B says:
-    Implication(Or(And(AKnave, BKnight), And(AKnight, BKnave)), And(AKnave, BKnight)),
+    # B: If B is telling the truth, then B is a Knight and A & B are of different kinds.
+    Biconditional(Or(And(AKnave, BKnight), And(AKnight, BKnave)), BKnight)
 )
 
 # Puzzle 3
@@ -61,10 +61,23 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
+    # Game Rules: Either AKnight or AKnave but not both.
     Or(AKnight, AKnave),
-    BKnave,
-    CKnave,
-    AKnight
+    Not(And(AKnight, AKnave)),
+
+    # Game Rules: Either BKnight or BKnave but not both.
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),
+
+    # A:
+    Biconditional(AKnight, Or(AKnight, AKnave)),
+
+    # B:
+    Biconditional(AKnight, BKnave),
+    Biconditional(BKnight, CKnave),
+
+    # C:
+    Biconditional(CKnight, AKnight)
 )
 
 
