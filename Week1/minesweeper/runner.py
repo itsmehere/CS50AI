@@ -187,9 +187,9 @@ while True:
                     flags = ai.mines.copy()
                     print("No moves left to make.")
                 else:
-                    print(f"No known safe moves, AI making random move: {move}.")
+                    print("No known safe moves, AI making random move.")
             else:
-                print(f"AI making safe move: {move}.")
+                print("AI making safe move.")
             time.sleep(0.2)
 
         # Reset game state
