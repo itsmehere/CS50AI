@@ -200,12 +200,15 @@ class MinesweeperAI():
         listOfNeighbors = self.surroundingCells(cell) - self.safes - self.moves_made
         self.knowledge.append(Sentence(listOfNeighbors, count))
 
-        # Mark new cells as safe or mines.
+        # Create a set that will contain new safe cells after the change in the KB
         inferedSafes = set()
+        # Create a set that will contain new mines after the change in the KB
         inferedMines = set()
 
         for sentence in self.knowledge:
             if len(sentence.cells) != 0:
+                # A change in the knowledge base may have occured after adding the new Sentence. The following 
+                # lines of code identify those changes and store them in their respective sets.
                 sentenceKnownSafes = sentence.known_safes()
                 sentenceKnownMines = sentence.known_mines()
 
@@ -214,21 +217,29 @@ class MinesweeperAI():
             else:
                 self.knowledge.remove(sentence)
 
+        # Mark all the new cells as safe
         for safeCell in inferedSafes:
             self.mark_safe(safeCell)
 
+        # Mark all the new cells as mines
         for mineCell in inferedMines:
             self.mark_mine(mineCell)
 
+        """
+        Lines 232-246 effectively simplify the knowledge base while adding more specific information.
+        For example, if we know sentence {A, B, C, D, E} = 2 as well as sentence {A, C, E} = 1, we can
+        conclude that {B, E} = 1.
+        """
 
         # Edit sentences based on new inferences.
         for sentence1 in self.knowledge:
-            # If empty, remove sentence. Otherwise, continue.
+            # If empty, remove sentence
             if len(sentence1.cells) != 0:  
                 for sentence2 in self.knowledge:
-                    # If empty, remove sentence. Otherwise, continue.
+                    # If empty, remove sentence
                     if len(sentence2.cells) != 0:
-                        # Update sentence2 with new inferences
+                        # If a sentence is a subset of another sentence, then we can simplify both of them to reduce
+                        # the size of the knowledge base and gain more accurate information.
                         if sentence1.cells.issubset(sentence2.cells) and sentence1 != sentence2:
                             sentence2.cells -= sentence1.cells
                             sentence2.count -= sentence1.count
@@ -254,7 +265,7 @@ class MinesweeperAI():
         for i in range(max(0, cell[0] - 1), min(self.height, cell[0] + 2)):
             # Loop through columns
             for j in range(max(0, cell[1] - 1), min(self.width, cell[1] + 2)):
-                # If the current cell is not the same as the selected cell, add to cells set.
+                # If the current cell is not the same as the selected cell, add it to the cells set.
                 if (i, j) != (cell[0], cell[1]):
                     cells.add((i,j))  
 
@@ -271,7 +282,6 @@ class MinesweeperAI():
         """
         for safeCell in self.safes:
             if safeCell not in self.moves_made:
-                print(safeCell)
                 return safeCell
         
         return None
@@ -295,7 +305,6 @@ class MinesweeperAI():
                 randCell = self.getRandomCell()
                 numIterations += 1
 
-        print(randCell)
         return randCell
 
     def getRandomCell(self):
