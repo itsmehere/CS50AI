@@ -228,7 +228,7 @@ class MinesweeperAI():
         """
         Lines 232-246 effectively simplify the knowledge base while adding more specific information.
         For example, if we know sentence {A, B, C, D, E} = 2 as well as sentence {A, C, E} = 1, we can
-        conclude that {B, E} = 1.
+        conclude that {B, D} = 1.
         """
 
         # Edit sentences based on new inferences.
@@ -253,9 +253,9 @@ class MinesweeperAI():
         """
         Returns all the surroundCells given a location.
         Given cell X, surroundingCells returns:
-        C C C
-        C X C
-        C C C
+        C  C  C
+        C  X  C
+        C  C  C
         A set of all C's.
         """
         cells = set()
@@ -308,8 +308,7 @@ class MinesweeperAI():
         return randCell
 
     def getRandomCell(self):
-        cell = (random.randint(0, self.height - 1), 
+        return (random.randint(0, self.height - 1), 
                 random.randint(0, self.width - 1))
-        return cell
         
 
