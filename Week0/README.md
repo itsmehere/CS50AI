@@ -59,18 +59,18 @@ Some of them have been briefly described below.
 ### Depth First Search:
 
 Depth First Search implements its frontier using the Stack data structure. Due to this, it always expands 
-the deepest node in the frontier. If that path leads to a dead end, it traverses back to the decision point and continues 
+the deepest node in the frontier. If that path leads to a dead-end, it traverses back to the decision point and continues 
 searching. It will always find a solution but it won't always be the shortest.
 
-DFS algorithm going through a maze from start to finish:
+DFS algorithm going through a maze from start to finish:  
 ![DFSmaze](images/DFSmaze.png)
 
 ### Breadth First Search:
 
-Bredth First Search is an algorithm that always expands the shallowest nodes in the frontier first. This algorithm uses
+Breadth First Search is an algorithm that always expands the shallowest nodes in the frontier first. This algorithm uses
 a queue as the frontier and explores all neighbor nodes at the current depth before moving on to the next level. BFS always finds a solution and it's the shortest solution.
 
-BFS algorithm going through a maze from start to finish:
+BFS algorithm going through a maze from start to finish:  
 ![BFSmaze](images/BFSmaze.png)
 
 ### Uninformed Search:
@@ -87,7 +87,7 @@ A search algorithm that expands the node closest to the goal. We can determine w
 
 #### A* Search:
 
-A search algorithm that expands node with lowest value of `g(n) + h(n)`
+A search algorithm that expands node with the lowest value of `g(n) + h(n)`
 
 `g(n)` = cost to reach node  
 `h(n)` = estimated cost to goal
@@ -153,7 +153,7 @@ Visualization of this algorithm:
 
 ### Alpha-Beta Pruning:
 
-An optimization techinque for the minimax algorithm that prunes branches in a tree to reduce computation and increase efficiency.
+An optimization technique for the minimax algorithm that prunes branches in a tree to reduce computation and increase efficiency.
 
 ### Depth-Limited Minimax:
 
