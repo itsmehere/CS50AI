@@ -191,9 +191,9 @@ Example:
 
 Description:
 
-**Appointment**: Dependent on Train(1 arrow pointing to it)
-**Train**: Dependent on maintenance and Rain(2 arrows pointing to it)
-**Maintenance**: Dependent on Rain(1 arrow pointing to it)
+**Appointment**: Dependent on Train(1 arrow pointing to it)  
+**Train**: Dependent on maintenance and Rain(2 arrows pointing to it)  
+**Maintenance**: Dependent on Rain(1 arrow pointing to it)  
 **Rain**: Not dependent on anything(no arrows pointing to it)
 
 **Using Bayesian Networks:**
@@ -226,7 +226,7 @@ We know that a conditional probability is equiavalent to <img src="https://rende
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=$ = \alpha P(Appointment, light, no)$">
 </p>  
-Either the train is on time, or the train is delayed:
+Either the train is on time, or the train is delayed:  
 
 ![$ = \alpha \[P(Appointment, light, no, on-time)\] + P(Appointment, light, no, delayed)$](https://render.githubusercontent.com/render/math?math=%24%20%3D%20%5Calpha%20%5BP(Appointment%2C%20light%2C%20no%2C%20on-time)%5D%20%2B%20P(Appointment%2C%20light%2C%20no%2C%20delayed)%24)
 
