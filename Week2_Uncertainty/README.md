@@ -15,7 +15,7 @@ The sum of all _P(<img src="https://render.githubusercontent.com/render/math?mat
 
 ![$\sum_{\omega \in \Omega} P(\omega) = 1$](https://render.githubusercontent.com/render/math?math=%24%5Csum_%7B%5Comega%20%5Cin%20%5COmega%7D%20P(%5Comega)%20%3D%201%24)
 
-Tthe sum of the probabilities of all possible worlds will be equal to $1$.
+Tthe sum of the probabilities of all possible worlds will be equal to 1.
 
 In a more complex model, it's not always the case that each world is equally as likely.  
 Example:  
@@ -122,26 +122,26 @@ This is useful when one probability is easier to know than another probability. 
 **AM:** 
 | _C = cloud_   | _C = ¬cloud_  |
 | ------------- | ------------- |
-|     $0.4$     |     $0.6$     |
+|      0.4      |      0.6      |
 
 **PM:**  
 | _R = rain_   | _R = ¬rain_   |
 | ------------ | ------------- |
-|     $0.1$    |     $0.9$     |
+|     0.1      |      0.9      |
 
 
 **AM & PM:**
 |              | _R = rain_   | _R = ¬rain_   |
 | ------------ | ------------ | ------------- |
-| _C = cloud_  |    $0.08$    |    $0.32$     |
-| _C = ¬cloud_ |     $0.02$   |     $0.58$    |
+| _C = cloud_  |     0.08     |     0.32      |
+| _C = ¬cloud_ |      0.02    |      0.58     |
 
 Probability of clouds given it is raining(`,` and `∧` are used interchangably).
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=$P(C | rain) = \frac{P(C, rain)}{P(rain)} = \alpha P(C, rain)$">
 </p>  
 
-Conditional distribution of <img src="https://render.githubusercontent.com/render/math?math=$P(C | rain)$"> is proportional to the joint probability of <img src="https://render.githubusercontent.com/render/math?math=$\alpha P(C, rain)$"> where <img src="https://render.githubusercontent.com/render/math?math=$\alpha$"> = <0.08, 0.02>(cloud probability given it's raining). Equivalently, <img src="https://render.githubusercontent.com/render/math?math=$\alpha$"> = <0.8, 0.2> to reach a sum of $1$.
+Conditional distribution of <img src="https://render.githubusercontent.com/render/math?math=$P(C | rain)$"> is proportional to the joint probability of <img src="https://render.githubusercontent.com/render/math?math=$\alpha P(C, rain)$"> where <img src="https://render.githubusercontent.com/render/math?math=$\alpha$"> = <0.08, 0.02>(cloud probability given it's raining). Equivalently, <img src="https://render.githubusercontent.com/render/math?math=$\alpha$"> = <0.8, 0.2> to reach a sum of 1.
 
 ### Negation:
 
@@ -200,8 +200,10 @@ Description:
 
 Let's say we wanted to find _P(light, no, delayed, miss)_.  
 Maintenance is dependent on rain so we write the probability of maintence taking on the value of _no_ as _P(light)*P(no | light)_.  
-The train is dependent on both Rain and Maintenance so we add both `light, no` to the previous expression to get _P(light)*P(no | light)*P(delayed | light, no)_.  
-Ultimately, appointment is only dependent on the Train so we add another segment to get the probability of _P(light, no, delayed, miss)_:  
+The train is dependent on both Rain and Maintenance so we add both `light, no` to the previous expression to get   
+_P(light)*P(no | light)*P(delayed | light, no)_.  
+Ultimately, appointment is only dependent on the Train so we add another segment to get the probability of   
+_P(light, no, delayed, miss)_:  
 
 <img src="https://render.githubusercontent.com/render/math?math=$P(light)*P(no | light)*P(delayed | light, no)*P(miss | delayed)$">
 
