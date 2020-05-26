@@ -5,11 +5,15 @@
 In a dice, there are 6 possible worlds: 1, 2, 3, 4, 5, and 6. Each world has a probability of being true and we can represent both the world and its probability by doing the following.
 
 <img src="https://render.githubusercontent.com/render/math?math=\omega"> -> A possible world  
-<img src="https://render.githubusercontent.com/render/math?math=\Omega"> -> The probability of world $\omega$ being true where <img src="https://render.githubusercontent.com/render/math?math=$0$ ≤ _P($\omega$)_ ≤ $1$">.
+<img src="https://render.githubusercontent.com/render/math?math=\Omega"> -> The probability of world 
+<img src="https://render.githubusercontent.com/render/math?math=\omega"> being true where  
+0 ≤ P(<img src="https://render.githubusercontent.com/render/math?math=\omega">) ≤ 1.
 
-The sum of all _P($\omega$)_ has to be equal to 1. Logically, this tells us that something thing will be true. In the dice example, it is guaranteed that we will get a number $x$ where 1 ≤ $x$ ≤ 6. We can represent this with the equation:
+The sum of all _P(<img src="https://render.githubusercontent.com/render/math?math=\omega">)_ has to be equal to 1. Logically, this tells us that something thing will be true. In the dice example, it is guaranteed that we will get a number 
+<img src="https://render.githubusercontent.com/render/math?math=x"> where 
+1 ≤ <img src="https://render.githubusercontent.com/render/math?math=x"> ≤ 6. We can represent this with the equation:
 
-$$\sum_{\omega \in \Omega} P(\omega) = 1$$
+![$\sum_{\omega \in \Omega} P(\omega) = 1$](https://render.githubusercontent.com/render/math?math=%24%5Csum_%7B%5Comega%20%5Cin%20%5COmega%7D%20P(%5Comega)%20%3D%201%24)
 
 Tthe sum of the probabilities of all possible worlds will be equal to $1$.
 
