@@ -22,9 +22,9 @@ Example:
 ![dice](images/dice.png)
 
 In this example, although each world is equally likely(a combination of dice rolls), the sum of the rolls are not.
-There are $6$ possible worlds where $7$ is the sum but only $1$ possible world where the sum is $12$. We can represent this using the following.
+There are 6 possible worlds where 7 is the sum but only 1 possible world where the sum is 12. We can represent this using the following.
 
-$P(12) = \frac{1}{36}$ --> Only $1$ out of the $36$ worlds have a sum of $12$.  
+<img src="https://render.githubusercontent.com/render/math?math=$P(12) = \frac{1}{36}$"> --> Only 1 out of the 36 worlds have a sum of 12.  
 $P(7) = \frac{6}{36} = \frac{1}{6}$ --> $6$ worlds have a sum of $12$.
 
 ## Unconditional Probability:
