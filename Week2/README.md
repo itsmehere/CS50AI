@@ -2,10 +2,10 @@
 
 ## Probability Theory:
 
-In a dice, there are $6$ possible worlds: $1$, $2$, $3$, $4$, $5$, and $6$. Each world has a probability of being true and we can represent both the world and its probability by doing the following.
+In a dice, there are 6 possible worlds: 1, 2, 3, 4, 5, and 6. Each world has a probability of being true and we can represent both the world and its probability by doing the following.
 
-$\omega$ -> A possible world  
- _P($\omega$)_ -> The probability of world $\omega$ being true where $0$ ≤ _P($\omega$)_ ≤ $1$.
+<img src="https://render.githubusercontent.com/render/math?math=omega"> -> A possible world  
+<img src="https://render.githubusercontent.com/render/math?math=Omega"> -> The probability of world $\omega$ being true where $0$ ≤ _P($\omega$)_ ≤ $1$.
 
 The sum of all _P($\omega$)_ has to be equal to 1. Logically, this tells us that something thing will be true. In the dice example, it is guaranteed that we will get a number $x$ where 1 ≤ $x$ ≤ 6. We can represent this with the equation:
 
