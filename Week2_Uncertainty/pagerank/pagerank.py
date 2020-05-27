@@ -57,8 +57,24 @@ def transition_model(corpus, page, damping_factor):
     linked to by `page`. With probability `1 - damping_factor`, choose
     a link at random chosen from all pages in the corpus.
     """
-    raise NotImplementedError
+    # Dict of link probabilities
+    pageProbabilities = dict()
 
+    # If the there are no links from the current page, choose any page at random.
+    if len(corpus[page]) == 0:
+        for aPage in corpus:
+            pageProbabilities[aPage] = 1 / len(corpus)
+    else:
+        # Add the probabilities for if the page was chosen randomly - note: This has to be above otherwise the key won't exist.
+        for aPage in corpus:
+            pageProbabilities[aPage] = (1 - damping_factor) / len(corpus)
+
+        # Add the probabilities for the pages that are linked.
+        for aPage in corpus[page]:
+            pageProbabilities[aPage] += damping_factor / len(corpus[page])
+
+    return pageProbabilities
+    
 
 def sample_pagerank(corpus, damping_factor, n):
     """
@@ -69,7 +85,34 @@ def sample_pagerank(corpus, damping_factor, n):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    # Dictionary that holds probability values - Initialized with values from corpus
+    pageRanks = dict()
+    for eachPage in corpus:
+        pageRanks[eachPage] = 0
+
+    # Dictionary to keep track of page occurances
+    pageOccurances = dict()
+    for eachPage in corpus:
+        pageOccurances[eachPage] = 0
+
+    # Choose first page at random
+    currentPage = random.choice(list(corpus.keys()))
+    pageOccurances[currentPage] += 1
+
+    # Fill dictionary with number of occurances
+    for i in range(1, n + 1):
+        linkProbabilites = transition_model(corpus, currentPage, damping_factor)
+        currentPage = random.choices(list(linkProbabilites.keys()), list(linkProbabilites.values()), k = 1)[0]
+        pageOccurances[currentPage] += 1
+
+    # Calculate probability
+    for page in pageRanks:
+        pageRanks[page] =  pageOccurances[page] / n
+
+    return pageRanks
+
+
+            
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -81,7 +124,37 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    # Create dict to hold pageRanks - set all PageRanks to be equal at first
+    pageRanks = dict()
+    for page in corpus:
+        pageRanks[page] = 1 / len(corpus)
+
+    # Tells us when to exit the process
+    notComplete = True
+
+    while notComplete:
+        # For each page in pageRanks, update the value
+        for page in pageRanks:
+            value = (1 - damping_factor) / len(corpus) + iterSum(corpus, page, damping_factor, pageRanks)
+            
+            # If the pageRanks are farily accurate, exit the process. Otherwise, continue updating
+            if abs(pageRanks[page] - value) <= 0.001:
+                notComplete = False
+                break
+            else:
+                pageRanks[page] = value
+
+    return pageRanks
+
+def iterSum(corpus, currentPage, damping_factor, pageRanks):
+    linkedPageSum = 0
+
+    for page in corpus:
+        if currentPage in corpus[page]:
+            linkedPageSum += pageRanks[page] / len(corpus[page])
+
+    return damping_factor * linkedPageSum
+
 
 
 if __name__ == "__main__":
