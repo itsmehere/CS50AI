@@ -79,6 +79,6 @@ To use `corpus2`:
 
 ## Other Links:
 
-Read more about PageRank [here](https://en.wikipedia.org/wiki/PageRank)
-Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)
+Read more about PageRank [here](https://en.wikipedia.org/wiki/PageRank)  
+Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)  
 [Original Problem Page](https://cs50.harvard.edu/ai/2020/projects/2/pagerank/)

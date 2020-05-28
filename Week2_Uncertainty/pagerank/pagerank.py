@@ -128,21 +128,23 @@ def iterate_pagerank(corpus, damping_factor):
     for page in corpus:
         pageRanks[page] = 1 / len(corpus)
 
-    # Tells us when to exit the process
     notComplete = True
-    # Keeps track of how many pages have accurate values
     numAccuratePages = 0
+    tempPageRanks = dict()
 
     while notComplete:
+        tempPageRanks = pageRanks
         # For each page in pageRanks, update the value
-        for page in pageRanks:
-            newPageRank = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, pageRanks))
+        for page in tempPageRanks:
+            newPageRank = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, tempPageRanks))
 
             # Check if a fairly accurate value has been reached
-            if abs(pageRanks[page] - newPageRank) < ACCURACY:
+            if abs(tempPageRanks[page] - newPageRank) < ACCURACY:
+                pageRanks[page] = newPageRank
                 numAccuratePages += 1
-                # If all pages have accurate values, then quit
-                if numAccuratePages == len(pageRanks):
+
+                # If all pages have accurate values, then exit the process
+                if numAccuratePages == len(tempPageRanks):
                     notComplete = False
                     break
             else:
@@ -155,7 +157,7 @@ def iterSum(corpus, currentPage, pageRanks):
     # Probability that we can get to currentPage via links
     linkedPageSum = 0
 
-    # If a page in the corpus has link to currentPage, add probability of getting to currentPage via that link to the total Sum
+    # If a page in the corpus has link to currentPage, add probability of getting to currentPage via that link to totalSum
     for page in corpus:
         if currentPage in corpus[page]:
             linkedPageSum += pageRanks[page] / len(corpus[page])
