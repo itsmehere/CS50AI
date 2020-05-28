@@ -62,16 +62,16 @@ def transition_model(corpus, page, damping_factor):
 
     # If the there are no links from the current page, choose any page at random.
     if len(corpus[page]) == 0:
-        for aPage in corpus:
-            pageProbabilities[aPage] = 1 / len(corpus)
+        for currentPage in corpus:
+            pageProbabilities[currentPage] = 1 / len(corpus)
     else:
         # Add the probabilities for if the page was chosen randomly - note: This has to be above otherwise the key won't exist.
-        for aPage in corpus:
-            pageProbabilities[aPage] = (1 - damping_factor) / len(corpus)
+        for currentPage in corpus:
+            pageProbabilities[currentPage] = (1 - damping_factor) / len(corpus)
 
         # Add the probabilities for the pages that are linked.
-        for aPage in corpus[page]:
-            pageProbabilities[aPage] += damping_factor / len(corpus[page])
+        for currentPage in corpus[page]:
+            pageProbabilities[currentPage] += damping_factor / len(corpus[page])
 
     return pageProbabilities
     
@@ -109,10 +109,7 @@ def sample_pagerank(corpus, damping_factor, n):
     for page in pageRanks:
         pageRanks[page] =  pageOccurances[page] / n
 
-    return pageRanks
-
-
-            
+    return pageRanks          
 
 
 def iterate_pagerank(corpus, damping_factor):
@@ -124,6 +121,8 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
+    ACCURACY = 0.001
+
     # Create dict to hold pageRanks - set all PageRanks to be equal at first
     pageRanks = dict()
     for page in corpus:
@@ -131,27 +130,28 @@ def iterate_pagerank(corpus, damping_factor):
 
     # Tells us when to exit the process
     notComplete = True
-    # Checks how many pages have accurate values
+    # Keeps track of how many pages have accurate values
     numAccuratePages = 0
 
     while notComplete:
         # For each page in pageRanks, update the value
         for page in pageRanks:
-            value = (1 - damping_factor) / len(corpus) + iterSum(corpus, page, damping_factor, pageRanks)
+            newPageRank = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, pageRanks))
 
-            # Check for accuracy
-            if abs(pageRanks[page] - value) < 0.001:
+            # Check if a fairly accurate value has been reached
+            if abs(pageRanks[page] - newPageRank) < ACCURACY:
                 numAccuratePages += 1
                 # If all pages have accurate values, then quit
                 if numAccuratePages == len(pageRanks):
                     notComplete = False
                     break
             else:
-                pageRanks[page] = value
+                pageRanks[page] = newPageRank
 
     return pageRanks
 
-def iterSum(corpus, currentPage, damping_factor, pageRanks):
+
+def iterSum(corpus, currentPage, pageRanks):
     # Probability that we can get to currentPage via links
     linkedPageSum = 0
 
@@ -160,9 +160,7 @@ def iterSum(corpus, currentPage, damping_factor, pageRanks):
         if currentPage in corpus[page]:
             linkedPageSum += pageRanks[page] / len(corpus[page])
 
-    # Chances of using a link is damping_factor
-    return damping_factor * linkedPageSum
-
+    return linkedPageSum
 
 
 if __name__ == "__main__":
