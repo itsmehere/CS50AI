@@ -139,7 +139,7 @@ def iterate_pagerank(corpus, damping_factor):
         for page in pageRanks:
             value = (1 - damping_factor) / len(corpus) + iterSum(corpus, page, damping_factor, pageRanks)
 
-            # If the pageRanks are farily accurate, exit the process. Otherwise, continue updating
+            # Check for accuracy
             if abs(pageRanks[page] - value) < 0.001:
                 numAccuratePages += 1
                 # If all pages have accurate values, then quit
