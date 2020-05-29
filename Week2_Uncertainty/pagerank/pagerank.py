@@ -2,6 +2,7 @@ import os
 import random
 import re
 import sys
+import copy
 
 DAMPING = 0.85
 SAMPLES = 10000
@@ -84,6 +85,11 @@ def sample_pagerank(corpus, damping_factor, n):
     Return a dictionary where keys are page names, and values are
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
+
+    EDIT: This way is probably not the best way to implement page sampling simply because we
+    have to create two dictonaries - one for the actual page ranks, and the other to hold the occurances. 
+    We can imagine with a larger corpus, this solution would not be optimal. For the sake of this problem, 
+    it is probably okay.
     """
     # Dictionary that holds probability values - Initialized with values from corpus
     pageRanks = dict()
@@ -99,9 +105,12 @@ def sample_pagerank(corpus, damping_factor, n):
     currentPage = random.choice(list(corpus.keys()))
     pageOccurances[currentPage] += 1
 
-    # Fill dictionary with number of occurances
-    for i in range(1, n + 1):
+    # Fill dictionary with number of occurances. This loop will run n - 1 times because range is exclusive.
+    # This is what we want since technically, the first iteration was choosing the first page (lines 104 - 105).
+    for i in range(1, n):
         linkProbabilites = transition_model(corpus, currentPage, damping_factor)
+
+        # Choose a random page using linkProbabilites(weights)
         currentPage = random.choices(list(linkProbabilites.keys()), list(linkProbabilites.values()), k = 1)[0]
         pageOccurances[currentPage] += 1
 
@@ -109,6 +118,7 @@ def sample_pagerank(corpus, damping_factor, n):
     for page in pageRanks:
         pageRanks[page] =  pageOccurances[page] / n
 
+    print(f"Sampling Sum: {accurateSum(pageRanks)}")
     return pageRanks          
 
 
@@ -122,19 +132,22 @@ def iterate_pagerank(corpus, damping_factor):
     PageRank values should sum to 1.
     """
     ACCURACY = 0.001
-
-    # Create dict to hold pageRanks - set all PageRanks to be equal at first
+    # Holds final pageRanks
     pageRanks = dict()
+    # Holds pageRanks to calculate values
+    tempPageRanks = dict()
+
+    # Both variables below are used to determine when to end the loop
+    complete = False
+    numAccuratePages = 0
+
+    # Set all PageRanks to be equal at first
     for page in corpus:
         pageRanks[page] = 1 / len(corpus)
 
-    notComplete = True
-    numAccuratePages = 0
-    tempPageRanks = dict()
+    while not complete:
+        tempPageRanks = copy.deepcopy(pageRanks)
 
-    while notComplete:
-        tempPageRanks = pageRanks
-        # For each page in pageRanks, update the value
         for page in tempPageRanks:
             newPageRank = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, tempPageRanks))
 
@@ -145,11 +158,15 @@ def iterate_pagerank(corpus, damping_factor):
 
                 # If all pages have accurate values, then exit the process
                 if numAccuratePages == len(tempPageRanks):
-                    notComplete = False
+                    complete = True
                     break
             else:
                 pageRanks[page] = newPageRank
 
+        # Reset number of accurate pages for next iteration
+        numAccuratePages = 0
+
+    print(f"Iterative Sum: {accurateSum(pageRanks)}")
     return pageRanks
 
 
@@ -163,6 +180,16 @@ def iterSum(corpus, currentPage, pageRanks):
             linkedPageSum += pageRanks[page] / len(corpus[page])
 
     return linkedPageSum
+
+
+# Function that returns an unrounded sum
+def accurateSum(pageRanks):
+    totalSum = 0
+
+    for page in pageRanks:
+        totalSum += pageRanks[page]
+
+    return totalSum
 
 
 if __name__ == "__main__":
