@@ -28,7 +28,7 @@ One way to interpret this model is as a Markov Chain, where each page represents
 
 By sampling states randomly from the Markov Chain, we can get an estimate for each page’s PageRank. We can start by choosing a page at random, then keep following links at random, keeping track of how many times we’ve visited each page. After we’ve gathered all of our samples (based on a number we choose in advance), the proportion of the time we were on each page might be an estimate for that page’s rank.
 
-However, this definition of PageRank proves slightly problematic, if we consider a network of pages like the below.
+**However, this definition of PageRank proves slightly problematic, if we consider a network of pages like the below.**
 
 ![corpus2](https://cs50.harvard.edu/ai/2020/projects/2/pagerank/images/network_disconnected.png)
 

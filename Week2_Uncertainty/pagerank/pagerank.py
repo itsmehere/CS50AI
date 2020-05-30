@@ -61,16 +61,16 @@ def transition_model(corpus, page, damping_factor):
     # Dict of link probabilities
     pageProbabilities = dict()
 
-    # If the there are no links from the current page, choose any page at random.
+    # If the there are no links from the current page, choose any page at random
     if len(corpus[page]) == 0:
         for currentPage in corpus:
             pageProbabilities[currentPage] = 1 / len(corpus)
     else:
-        # Add the probabilities for if the page was chosen randomly - note: This has to be above otherwise the key won't exist.
+        # Add the probabilities for if the page was chosen randomly
         for currentPage in corpus:
             pageProbabilities[currentPage] = (1 - damping_factor) / len(corpus)
 
-        # Add the probabilities for the pages that are linked.
+        # Add the probabilities for the pages that are linked
         for currentPage in corpus[page]:
             pageProbabilities[currentPage] += damping_factor / len(corpus[page])
 
@@ -114,7 +114,7 @@ def sample_pagerank(corpus, damping_factor, n):
         currentPage = random.choices(list(linkProbabilites.keys()), list(linkProbabilites.values()), k = 1)[0]
         pageOccurances[currentPage] += 1
 
-    # Calculate probability
+    # Calculate probability based on occurances
     for page in pageRanks:
         pageRanks[page] =  pageOccurances[page] / n
 
@@ -174,15 +174,18 @@ def iterSum(corpus, currentPage, pageRanks):
     # Probability that we can get to currentPage via links
     linkedPageSum = 0
 
-    # If a page in the corpus has link to currentPage, add probability of getting to currentPage via that link to totalSum
     for page in corpus:
+        # For page i containing a link to currentPage, pageRank of currentPage is pageRank of i ÷ all i's links
         if currentPage in corpus[page]:
             linkedPageSum += pageRanks[page] / len(corpus[page])
+        # If a page has no links, assume it has a link to all pages
+        elif len(corpus[page]) == 0:
+            linkedPageSum += pageRanks[page] / len(corpus)
 
     return linkedPageSum
 
 
-# Function that returns an unrounded sum
+# Returns an unrounded sum of pageRanks
 def accurateSum(pageRanks):
     totalSum = 0
 
