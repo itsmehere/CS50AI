@@ -139,8 +139,115 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
-    print(people)
-    raise NotImplementedError
+    probInformation = dict()
+    joint_probability = 1
+
+    for person in people:
+        if person in one_gene:
+            if person in have_trait:
+                probInformation[person] = [1, True]
+            else:
+                probInformation[person] = [1, False]
+        elif person in two_genes:
+            if person in have_trait:
+                probInformation[person] = [2, True]
+            else:
+                probInformation[person] = [2, False]
+        else:
+            if person in have_trait:
+                probInformation[person] = [0, True]
+            else:
+                probInformation[person] = [0, False]
+
+    for person in people:
+        joint_probability *= findProb(person, people, probInformation)
+
+    return joint_probability
+
+
+def findProb(person, people, jointProbInfo):
+    jointProb = 0
+
+    # Info about the person for whom we want to find the probability
+    personGene = jointProbInfo[person][0]
+    existsTrait = jointProbInfo[person][1]
+
+    # If they have parents, they will be stored here
+    p1 = people[person]["mother"]
+    p2 = people[person]["father"]
+
+    # If the person doesn't have parents, calculate probabilites based on info in PROBS
+    if p1 == None and p2 == None:
+        jointProb = PROBS[gene][personGene] * PROBS[trait][personGene][existsTrait]
+    else:
+        # Person can get 1 copy of the gene from parent1 or from parent2 but not both
+        if personGene == 1:
+            # p1Prob represents the probability that person will get 1 copy of the gene from p1
+            if jointProbInfo[p1][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p1][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"]
+            
+            # p2Prob represents the probability that person will get 1 copy of the gene from p2
+            if jointProbInfo[p2][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p2][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"] 
+
+            # Probability of existsTrait given 1 copy of the gene
+            traitPossibility = PROBS["trait"][1][existsTrait]
+            # If p1Prob is 0.01 for example, the chances of p1Prob not happening is 1 - p1Prob
+            jointProb = traitPossibility * (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))
+
+        elif personGene == 2:
+            # p1Prob represents the probability that person will get 2 copies of the gene from p1
+            if jointProbInfo[p1][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p1][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"]
+            
+            # p2Prob represents the probability that person will get 2 copies of the gene from p2
+            if jointProbInfo[p2][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p2][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"] 
+
+            # Probability of existsTrait given 2 copies of the gene
+            traitPossibility = PROBS["trait"][2][existsTrait]
+            # Joint probability of both parents 
+            jointProb = traitsPossibility * p1Prob * p2Prob
+
+        else:
+            # p1Prob represents the probability that person will get 0 copies of the gene from p1
+            if jointProbInfo[p1][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p1][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"]
+            
+            # p2Prob represents the probability that person will get 0 copies of the gene from p2
+            if jointProbInfo[p2][0] == 1:
+                p1Prob = (1 - PROBS["mutation"]) * 0.5
+            elif joint_probability[p2][0] == 2:
+                p1Prob = 1 - PROBS["mutation"]
+            else:
+                p1Prob = PROBS["mutation"] 
+
+            # Probability of existsTrait given 0 copies of the gene
+            traitPossibility = PROBS["trait"][0][existsTrait]
+            # Joint probability of both parents 
+            jointProb = traitsPossibility * p1Prob * p2Prob
+
+    return jointProb
 
 
 def update(probabilities, one_gene, two_genes, have_trait, p):
