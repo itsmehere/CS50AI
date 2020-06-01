@@ -203,7 +203,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 else:
                     p2Prob = 1 - PROBS["mutation"]
 
-                geneProb = p1Prob + p2Prob
+                geneProb = p1Prob * p2Prob
                 jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
 
     return jointProb
