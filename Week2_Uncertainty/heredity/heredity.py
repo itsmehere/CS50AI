@@ -138,11 +138,20 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone not in `one_gene` or `two_gene` does not have the gene, and
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
+
+    NOTE: When a parent has 1 gene, after it is passed two things can happen.
+    1) The gene mutates with probability mutation
+    2) The gene stays "normal" and doesn't mutate, with probability (1 - mutation)
+    This can be represented as 0.5 * (1 - mutation) + 0.5 * mutation. This simplifies
+    to 0.5 as shown below (for all cases where parent == 1).
     """
+    # probInformation holds specifics about what we want to know about which people
     probInformation = getJointDistInfo(people, one_gene, two_genes, have_trait)
+
     joint_probability = 1
 
     for person in people:
+        # Joint probability is made up of smaller joint probabilites of each person
         joint_probability *= findProb(person, people, probInformation)
 
     return joint_probability
@@ -184,10 +193,11 @@ def findProb(person, people, jointProbInfo):
             # Probability of existsTrait given 1 copy of the gene
             traitPossibility = PROBS["trait"][1][existsTrait]
             # If p1Prob is 0.01 for example, the chances of p1Prob not happening is 1 - p1Prob
+            # This way, we can model the situation where the gene is coming from only 1 parent
             jointProb = traitPossibility * (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))
 
         elif personGene == 2:
-            # p1Prob represents the probability that person will get 2 copies of the gene from p1
+            # p1Prob represents the probability that person will get 1 copy of the gene from p1
             if jointProbInfo[p1][0] == 1:
                 p1Prob = 0.5
             elif jointProbInfo[p1][0] == 2:
@@ -195,7 +205,7 @@ def findProb(person, people, jointProbInfo):
             else:
                 p1Prob = PROBS["mutation"]
             
-            # p2Prob represents the probability that person will get 2 copies of the gene from p2
+            # p2Prob represents the probability that person will get 1 copy of the gene from p2
             if jointProbInfo[p2][0] == 1:
                 p2Prob = 0.5
             elif jointProbInfo[p2][0] == 2:
@@ -269,8 +279,8 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
         personGene = probInformation[person][0]
         personTrait = probInformation[person][1]
 
-        probabilities[person]["gene"][personGene] += p
-        probabilities[person]["trait"][personTrait] += p
+        probabilities[person]["gene"][personGene] = p
+        probabilities[person]["trait"][personTrait] = p
 
 
 def normalize(probabilities):
