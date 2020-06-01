@@ -30,6 +30,31 @@ Ultimately, the probabilities you calculate will be based on these values in PRO
 
 Ultimately, we’re looking to calculate these probabilities based on some evidence: given that we know certain people do or do not exhibit the trait, we’d like to determine these probabilities. We can calculate a conditional probability by summing up all of the joint probabilities that satisfy the evidence, and then normalize those probabilities so that they each sum to 1.
 
+## Solution Explanation:
+
+Rather than explain some parts of the solution using comments, I chose to do it here so it's more clear.
+
+**`parentProbability()`**  
+This function determins the probability of a parent giving 1 copy of the gene. Let's consider the case where `parent` is in `two_genes`, then 'one_gene', and finally 0. 
+- **2:** The probability of the parent giving a copy of the sick gene if they have 2 is 100%. But this is without accounting for mutation. There is a small chance, represented by `PROBS["mutation"]` that the gene **will** mutate into no longer being a target gene(won't be sick anymore). Conversely, if we want to know the probability of the child receiving the **sick** gene, it can be represented as `1 - PROBS["mutation"]`.
+- **1:** The probability of the parent giving a copy of the sick gene if they have 1 is 50%. Once again, this is without accounting for mutation. This is a little more complicated because the single gene could be either sick or not sick. Given the 1 gene, the child could get the 1 copy of the gene that's mutated with probability `0.5 * PROBS["mutation"]`. Also, the child could get 1 copy of the gene that's not mutated with probability `0.5 * (1 - PROBS["mutation"])`. If we add these together, it will represent the probability of the child getting one copy of the gene from a parent with 1 copy. Well...hold on a second...that just simplifies to `0.5`!
+- **0:** The probability of the parent giving a copy of the sick gene if they have 0 is 0% without mutation. This one is simple because the only way the parent can give 1 copy of the gene is if a mutation occurs; with probability of `PROBS["mutation"]`.
+
+**Line 162: `geneProb = (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))`**  
+There are two ways a child can get 1 copy of the gene. Either they get the gene from their mother and not their father, or they get the gene from their father and not their mother. Let's say their mother has 0 copies of the gene, so the child will get the gene from his mother with probability `0.01` (this is `PROBS["mutation"])`, since the only way to get the gene from their mother is if it mutated; conversely, they will not get the gene from their mother with probability `0.99`. Let's say their father has 2 copies of the gene, so they will get the gene from their father with probability `0.99` (this is `1 - PROBS["mutation"]`), but will get the gene from their mother with probability `0.01` (the chance of a mutation). Both of these cases can be added together to get `0.99 * 0.99 + 0.01 * 0.01 = 0.9802`, the probability that they have 1 copy of the gene.
+
+TLDR:
+- First1 `0.99`: represents probability of getting gene from father(given he has 2 copies)
+- Second1 `0.99`: represents probability of not getting gene from mother(given she has 0 copies)  
+Multiply First1 and Second1 to get first case joint probability - we'll call this value `jprob1`.
+- First2 `0.01`: represents probability of getting gene from mother(given she has 0 copies)
+- Second2 `0.01`: represents probability of not getting gene from father(given he has 2 copies)
+Multiply First2 and Second2 to get second case joint probability - we'll call this value `jprob2`.
+
+Add `jprob1` to `jprob2` to get the final probability of the child receiving 1 copy.
+
+
+
 ## Usage:
 
 Needs command line argument of `.csv` file in `/data`

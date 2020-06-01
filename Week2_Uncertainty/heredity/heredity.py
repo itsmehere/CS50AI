@@ -155,59 +155,57 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             jointProb *= PROBS["gene"][personGene] * PROBS["trait"][personGene][personTrait]
         else:
             if personGene == 1:
-                if p1 in one_gene:
-                    p1Prob = 0.5
-                elif p1 in two_genes:
-                    p1Prob = 1 - PROBS["mutation"]
-                else:
-                    p1Prob = PROBS["mutation"]
-
-                if p2 in one_gene:
-                    p2Prob = 0.5
-                elif p2 in two_genes:
-                    p2Prob = 1 - PROBS["mutation"]
-                else:
-                    p2Prob = PROBS["mutation"]
+                # Either parent1 gives 1 copy or parent2 gives 1 copy(not both).
+                p1Prob = parentProbability(p1, one_gene, two_genes)
+                p2Prob = parentProbability(p2, one_gene, two_genes)
                 
                 geneProb = (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))
-                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
-            elif personGene == 2:
-                if p1 in one_gene:
-                    p1Prob = 0.5
-                elif p1 in two_genes:
-                    p1Prob = 1 - PROBS["mutation"]
-                else:
-                    p1Prob = PROBS["mutation"]
 
-                if p2 in one_gene:
-                    p2Prob = 0.5
-                elif p2 in two_genes:
-                    p2Prob = 1 - PROBS["mutation"]
-                else:
-                    p2Prob = PROBS["mutation"]
+                # The probability that the child have 2 genes with given trait
+                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
+
+            elif personGene == 2:
+                # p1Prob * p2Prob represents the joint probability of child getting 2 copies
+                p1Prob = parentProbability(p1, one_gene, two_genes)
+                p2Prob = parentProbability(p2, one_gene, two_genes)
 
                 geneProb = p1Prob * p2Prob
-                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
-            else:
-                if p1 in one_gene:
-                    p1Prob = 0.5
-                elif p1 in two_genes:
-                    p1Prob = PROBS["mutation"]
-                else:
-                    p1Prob = 1 - PROBS["mutation"]
 
-                if p2 in one_gene:
-                    p2Prob = 0.5
-                elif p2 in two_genes:
-                    p2Prob = PROBS["mutation"]
-                else:
-                    p2Prob = 1 - PROBS["mutation"]
+                # The probability that the child have 2 genes with given trait
+                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
+
+            else:
+                p1Prob = altParentProbability(p1, one_gene, two_genes)
+                p2Prob = altParentProbability(p2, one_gene, two_genes)
 
                 geneProb = p1Prob * p2Prob
                 jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
 
     return jointProb
                 
+def parentProbability(parent, one_gene, two_genes):
+    if parent in one_gene:
+        parentProb = 0.5
+    elif parent in two_genes:
+        parentProb = 1 - PROBS["mutation"]
+    else:
+        parentProb = PROBS["mutation"]
+
+    return parentProb
+
+def altParentProbability(parent, one_gene, two_genes):
+    # For child to receive 0, both parents have to give 0 copies
+    if parent in one_gene:
+        parentProb = 0.5
+    elif parent in two_genes:
+        # If p1 has two_genes, p1 will only give 0 if a mutation occurs 
+        parentProb = PROBS["mutation"]
+    else:
+        # If p1 has 0, p1 will give 0 unless a mutation occurs
+        parentProb = 1 - PROBS["mutation"]
+
+    return parentProb
+
 
 def getPeopleInfo(people, one_gene, two_genes, have_trait):
     peopleInfo = dict()
