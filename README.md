@@ -2,17 +2,17 @@
 
 CS50's Introduction to Artificial Intelligence with Python
 
-## Week 0 - Search:
+## Week 0 - Search: ✔️
 
 - Degrees
 - Tictactoe
 
-## Week 1 - Knowledge:
+## Week 1 - Knowledge: ✔️
 
 - Knights and Knaves
 - Minesweeper
 
-## Week 3 - Uncertainty:
+## Week 3 - Uncertainty: ✔️
 
 - PageRank
 - Heredity
