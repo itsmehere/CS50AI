@@ -138,6 +138,9 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone not in `one_gene` or `two_gene` does not have the gene, and
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
+
+    Note:
+    Lines 169 and 195-204 explained in readme
     """
     jointProb = 1
     peopleInfo = getPeopleInfo(people, one_gene, two_genes, have_trait)
@@ -154,17 +157,21 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         if p1 == None and p2 == None:
             jointProb *= PROBS["gene"][personGene] * PROBS["trait"][personGene][personTrait]
         else:
-            if personGene == 1:
-                # Either parent1 gives 1 copy or parent2 gives 1 copy(not both).
+            # More appropriate variable name now that we know that we know person is a child
+            childGene = personGene
+            childTrait = personTrait
+
+            if childGene == 1:
+                # Either parent1 gives 1 copy or parent2 gives 1 copy(not both)
                 p1Prob = parentProbability(p1, one_gene, two_genes)
                 p2Prob = parentProbability(p2, one_gene, two_genes)
                 
                 geneProb = (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))
 
                 # The probability that the child have 2 genes with given trait
-                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
+                jointProb *= PROBS["trait"][childGene][childTrait] * geneProb
 
-            elif personGene == 2:
+            elif childGene == 2:
                 # p1Prob * p2Prob represents the joint probability of child getting 2 copies
                 p1Prob = parentProbability(p1, one_gene, two_genes)
                 p2Prob = parentProbability(p2, one_gene, two_genes)
@@ -172,17 +179,20 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 geneProb = p1Prob * p2Prob
 
                 # The probability that the child have 2 genes with given trait
-                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
+                jointProb *= PROBS["trait"][childGene][childTrait] * geneProb
 
             else:
+                # For child to receive 0, both parents have to give 0 copies
                 p1Prob = altParentProbability(p1, one_gene, two_genes)
                 p2Prob = altParentProbability(p2, one_gene, two_genes)
 
                 geneProb = p1Prob * p2Prob
-                jointProb *= PROBS["trait"][personGene][personTrait] * geneProb
+                jointProb *= PROBS["trait"][childGene][childTrait] * geneProb
 
     return jointProb
-                
+
+
+# Returns the probability of a parent giving 1 copy
 def parentProbability(parent, one_gene, two_genes):
     if parent in one_gene:
         parentProb = 0.5
@@ -193,20 +203,21 @@ def parentProbability(parent, one_gene, two_genes):
 
     return parentProb
 
+
+# Returns the probability of a parent giving 0 copies - based on how many parent has
 def altParentProbability(parent, one_gene, two_genes):
-    # For child to receive 0, both parents have to give 0 copies
     if parent in one_gene:
         parentProb = 0.5
     elif parent in two_genes:
-        # If p1 has two_genes, p1 will only give 0 if a mutation occurs 
+        # If parent has two_genes, parent will only give 0 if a mutation occurs 
         parentProb = PROBS["mutation"]
     else:
-        # If p1 has 0, p1 will give 0 unless a mutation occurs
+        # If parent has 0, parent will give 0 unless a mutation occurs
         parentProb = 1 - PROBS["mutation"]
 
     return parentProb
 
-
+# Returns a dict of keys that are people. The values are what we want to know about each person
 def getPeopleInfo(people, one_gene, two_genes, have_trait):
     peopleInfo = dict()
 
@@ -228,6 +239,7 @@ def getPeopleInfo(people, one_gene, two_genes, have_trait):
                 peopleInfo[person] = [0, False]
 
     return peopleInfo
+
 
 def update(probabilities, one_gene, two_genes, have_trait, p):
     """
@@ -258,6 +270,8 @@ def normalize(probabilities):
             for value in probabilities[person][field]:
                 probabilities[person][field][value] *= scaleFactor
 
+
+# Find the sum of all values given a dict
 def sumOfValues(field):
     sumOfVals = 0
     for value in field:
