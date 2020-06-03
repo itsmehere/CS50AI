@@ -63,7 +63,7 @@ the deepest node in the frontier. If that path leads to a dead-end, it traverses
 searching. It will always find a solution but it won't always be the shortest.
 
 DFS algorithm going through a maze from start to finish:  
-![DFSmaze](images/DFSmaze.png)
+![DFSmaze](images/0_Search/DFSmaze.png)
 
 ### Breadth First Search:
 
@@ -71,7 +71,7 @@ Breadth First Search is an algorithm that always expands the shallowest nodes in
 a queue as the frontier and explores all neighbor nodes at the current depth before moving on to the next level. BFS always finds a solution and it's the shortest solution.
 
 BFS algorithm going through a maze from start to finish:  
-![BFSmaze](images/BFSmaze.png)
+![BFSmaze](images/0_Search/BFSmaze.png)
 
 ### Uninformed Search:
 
@@ -147,7 +147,7 @@ function MIN-VALUE(state):
 ```
 
 Visualization of this algorithm:
-![Minimax](images/minimax.png)
+![Minimax](images/0_Search/minimax.png)
 
 ## Optimizations:
 

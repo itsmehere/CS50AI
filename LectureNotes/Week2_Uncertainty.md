@@ -19,7 +19,7 @@ Tthe sum of the probabilities of all possible worlds will be equal to 1.
 
 In a more complex model, it's not always the case that each world is equally as likely.  
 Example:  
-![dice](images/dice.png)
+![dice](images/2_Uncertainty/dice.png)
 
 In this example, although each world is equally likely(a combination of dice rolls), the sum of the rolls are not.
 There are 6 possible worlds where 7 is the sum but only 1 possible world where the sum is 12. We can represent this using the following.
@@ -187,7 +187,7 @@ Data structure that represents the dependencies among random variables.
 - Each node _X_ has probabillity distribution: <img src="https://render.githubusercontent.com/render/math?math=$P(X|Parents(X))$">
 
 Example:  
-![BayesianNetworkExample](images/bayesianNetwork.png)
+![BayesianNetworkExample](images/2_Uncertainty/bayesianNetwork.png)
 
 Description:
 
@@ -270,7 +270,7 @@ The assumption that the curent state depends on only a finite fixed number of pr
 ### Markov Chain:
 
 A sequence of random variables where the distribution of each variable follows the Markov assumption.  
-![markovChainExample](images/markovChain.png)  
+![markovChainExample](images/2_Uncertainty/markovChain.png)  
 
 **Transition Model:** Transition from one state to another state.
 
@@ -280,7 +280,7 @@ Given today's weather, predict tomorrow's weather. Use tomorrow's weather to pre
 
 A Markov model for a system with hidden states that generate some observed event.  
 Sensor Model:  
-![hiddenMarkov](images/hiddenMarkovModel.png)  
+![hiddenMarkov](images/2_Uncertainty/hiddenMarkovModel.png)  
 In this case, we aren't directly observing umbrellas but we are using sun and rain to predict something that is "hidden."
 
 ### Sensor Markov Assumption:
