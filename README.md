@@ -17,7 +17,7 @@ CS50's Introduction to Artificial Intelligence with Python
 - PageRank
 - Heredity
 
-## Week 4 - Optimization:
+## Week 4 - Optimization: ⬅
 
 - Crossword
 
