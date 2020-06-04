@@ -66,5 +66,5 @@ python heredity.py data/family0.csv
 
 ## Other Links:
 
-Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)
+Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)  
 [Original Problem Page](https://cs50.harvard.edu/ai/2020/projects/2/heredity/)
