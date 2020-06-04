@@ -47,7 +47,7 @@ function Hill-Climb(problem):
 
 ### Hill Climbing Limitations:
 
-It doesn't always find the global maximum/minimum
+It doesn't always find the global maximum/minimum  
 ![HCLimitation](images/3_Optimization/hillClimbingLimitations.png)
 
 ### Hill Climbing Variants:
@@ -107,8 +107,8 @@ This allows us to dislodge ourselves and explore spaces which will ultimately ha
 ### Terms:
 
 **Hard Constraints:** Constraints that must be satisfied in a correct solution.  
-**Soft Constraints:** Constraints that express some notion of which solutions are preferred over others.
-**Unary Constraints:** Constraint involving only one variable(_A_ ≠ _Monday_).
+**Soft Constraints:** Constraints that express some notion of which solutions are preferred over others.  
+**Unary Constraints:** Constraint involving only one variable(_A_ ≠ _Monday_).  
 **Binary Constraints:** Constraint involving two variables(_A_ ≠ _B_).
 
 ### Algorithm:
@@ -158,7 +158,7 @@ After making _A_ and _B_ node-consistent, we ended with these values:
 _A_ : {_Tue_, _Wed_}    
 _B_ : {_Wed_}
 
-From the logic point of view, _A_ is arc-consistent with _B_ when _B_ has a choice(that is consistent) with all values of _A_. In the above situation, when _A_ takes on the value of _Tue_, _B_ has a choice of _Wed_ that doesn't violate the constraints. However, when _A_ takes on the value of _Wed_, there is no possible choice for _B_ to make that doesn't violate the constraints. If _B_ were to take on _Wed_, it would violate _A_ ≠ _B_. To fix this and make _A_ arc-consistent with _B_, we would have to remove _Wed_ from _A_'s domain. We can conclude that _A_ = _Tue_, _B_ = _Wed_.
+From the logic point of view, _A_ is arc-consistent with _B_ when _B_ has a choice(that is consistent) with all values of _A_. In the above situation, when _A_ takes on the value of _Tue_, _B_ has a choice of _Wed_ that doesn't violate the constraints. However, when _A_ takes on the value of _Wed_, there is no possible choice for _B_ to make that doesn't violate the constraints. If _B_ were to take on _Wed_, it would violate _A_ ≠ _B_. To fix this and make _A_ arc-consistent with _B_, we would have to remove _Wed_ from _A_'s domain. Then, We can conclude that _A_ = _Tue_, _B_ = _Wed_.
 
 ### Pseudocode:
 
@@ -200,7 +200,7 @@ Given this example:
 
 ![arcConsistencyExample](images/3_Optimization/arcConsistencyLimitations.png)
 
-Arc-consistency considers just two variables so it's quite easy to make all nodes here arc-consistent with their neighbors which means `AC-3` won't be able to solve this problem on its own but we can use search algorithms along with it to do so.
+Arc-consistency considers just two variables so it's quite easy to make all nodes here arc-consistent with their neighbors. This  means `AC-3` won't be able to solve this problem on its own but, we can use search algorithms along with it to do so.
 
 ### CSP as Search Problems:
 
