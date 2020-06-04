@@ -2,35 +2,35 @@
 
 CS50's Introduction to Artificial Intelligence with Python
 
-## Week 0 - Search: ✔️
+## [Week 0 - Search:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week0_Search.md) ✔️
 
-- Degrees
-- Tictactoe
+- [Degrees](https://github.com/itsmihirrao/CS50AI/tree/master/Week0_Search/degrees)
+- [Tictactoe](https://github.com/itsmihirrao/CS50AI/tree/master/Week0_Search/tictactoe)
 
-## Week 1 - Knowledge: ✔️
+## [Week 1 - Knowledge:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week1_Knowledge.md) ✔️
 
-- Knights and Knaves
-- Minesweeper
+- [Knights and Knaves](https://github.com/itsmihirrao/CS50AI/tree/master/Week1_Knowledge/knights)
+- [Minesweeper](https://github.com/itsmihirrao/CS50AI/tree/master/Week1_Knowledge/minesweeper)
 
-## Week 3 - Uncertainty: ✔️
+## [Week 2 - Uncertainty:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week2_Uncertainty.md) ✔️
 
-- PageRank
-- Heredity
+- [PageRank](https://github.com/itsmihirrao/CS50AI/tree/master/Week2_Uncertainty/pagerank)
+- [Heredity](https://github.com/itsmihirrao/CS50AI/tree/master/Week2_Uncertainty/heredity)
 
-## Week 4 - Optimization: ⬅
+## [Week 3 - Optimization:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week3_Optimization.md)
 
 - Crossword
 
-## Week 5 - Learning:
+## Week 4 - Learning:
 
 - Shopping
 - Nim
 
-## Week 6 - Neural Networks:
+## Week 5 - Neural Networks:
 
 - Traffic
 
-## Week 7 - Language:
+## Week 6 - Language:
 
 - Parser
 - Questions
