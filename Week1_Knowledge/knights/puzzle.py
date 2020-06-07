@@ -69,6 +69,10 @@ knowledge3 = And(
     Or(BKnight, BKnave),
     Not(And(BKnight, BKnave)),
 
+    # Game Rules: Either CKnight or CKnave but not both.
+    Or(CKnight, CKnave),
+    Not(And(CKnight, CKnave)),
+
     # A:
     Biconditional(AKnight, Or(AKnight, AKnave)),
 
