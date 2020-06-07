@@ -77,7 +77,7 @@ knowledge3 = And(
     Biconditional(AKnight, Or(AKnight, AKnave)),
 
     # B:
-    Biconditional(AKnight, BKnave),
+    Biconditional(BKnight, Biconditional(AKnight, AKnave)),
     Biconditional(BKnight, CKnave),
 
     # C:
