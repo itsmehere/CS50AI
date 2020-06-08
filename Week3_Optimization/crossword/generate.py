@@ -101,7 +101,7 @@ class CrosswordCreator():
         """
         for variable in self.domains:
             for value in self.domains[variable]:
-                if value.length != variable.length:
+                if len(value) != variable.length:
                     self.domains[variable].remove(value)
 
     def revise(self, x, y):
