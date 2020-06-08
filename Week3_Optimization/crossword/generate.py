@@ -1,4 +1,5 @@
 import sys
+import copy
 
 from crossword import *
 
@@ -164,14 +165,39 @@ class CrosswordCreator():
         Return True if `assignment` is complete (i.e., assigns a value to each
         crossword variable); return False otherwise.
         """
-        raise NotImplementedError
+        for var in self.crossword.variables:
+            if var not in assignment.keys():
+                return False
+            if len(assignment[var]) != 1:
+                return False
+        return True
 
     def consistent(self, assignment):
         """
         Return True if `assignment` is consistent (i.e., words fit in crossword
         puzzle without conflicting characters); return False otherwise.
         """
-        raise NotImplementedError
+        for xVar in assignment:
+            if len(assignment[xVar]) > len(set(assignment[xVar])):
+                return False
+            
+            if len(assignment[xVar]) != 0:
+                for value in assignment[xVar]:
+                    if xVar.length != len(value):
+                        return False
+            else:
+                return False
+
+            for yVar in self.crossword.neighbors(xVar):
+                if xVar != yVar:
+                    xCopy = copy.deepcopy(xVar)
+                    yCopy = copy.deepcopy(yVar)
+                    if not ac3(xCopy, yCopy):
+                        return False
+            
+            return True
+
+            
 
     def order_domain_values(self, var, assignment):
         """
@@ -180,7 +206,7 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        raise NotImplementedError
+        return assignment[var]
 
     def select_unassigned_variable(self, assignment):
         """
@@ -190,7 +216,9 @@ class CrosswordCreator():
         degree. If there is a tie, any of the tied variables are acceptable
         return values.
         """
-        raise NotImplementedError
+        for var in assignment:
+            if len(assignment[var]) > 1:
+                return var
 
     def backtrack(self, assignment):
         """
