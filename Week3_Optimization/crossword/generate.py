@@ -117,6 +117,8 @@ class CrosswordCreator():
         if overlap == None:
             return False
 
+        revised = False
+
         for xVal in self.domains[x]:
             foundPossibleVal = False
             for yVal in self.domains[y]:
@@ -125,6 +127,9 @@ class CrosswordCreator():
                     break
             if foundPossibleVal == False:
                 self.domains[x].remove(xVal)
+                revised = True
+
+        return revised
 
     def ac3(self, arcs=None):
         """
