@@ -140,7 +140,24 @@ class CrosswordCreator():
         Return True if arc consistency is enforced and no domains are empty;
         return False if one or more domains end up empty.
         """
-        raise NotImplementedError
+        pairsToProcess = set()
+
+        if arcs is None:
+            for varA in self.crossword.variables:
+                for varB in self.crossword.variables:
+                    if varA != varB:
+                        parisToProcess.add((varA, varB))
+        else:
+            pairsToProcess = arcs
+
+        while len(pairsToProcess) != 0:
+            pair = variablesToProcess.pop()
+            if revise(pair[0], pair[1]):
+                if len(self.domains[pair[0]]) == 0:
+                    return False
+                for neighbor in (self.crossword.neighbors(pair[0]) - pair[1]):
+                    pairsToProcess.add((neighbor, pair[0]))
+        return True
 
     def assignment_complete(self, assignment):
         """
