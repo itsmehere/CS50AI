@@ -197,8 +197,6 @@ class CrosswordCreator():
             
             return True
 
-            
-
     def order_domain_values(self, var, assignment):
         """
         Return a list of values in the domain of `var`, in order by
