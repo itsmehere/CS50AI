@@ -103,6 +103,8 @@ class CrosswordCreator():
         for variable in self.domains:
             varsToRemove = set()
             for value in self.domains[variable]:
+                # If the variable length and the length of the word aren't equal, remove
+                # the word from the domain of the variable - unary constraint
                 if len(value) != variable.length:
                     varsToRemove.add(value)
             for var in varsToRemove:
@@ -127,13 +129,16 @@ class CrosswordCreator():
         for xVal in self.domains[x]:
             foundPossibleVal = False
             for yVal in self.domains[y]:
+                # If the letters at the given overlap point are equal, it is a possible value 
                 if xVal[overlap[0]] == yVal[overlap[1]] and xVal != yVal:
                     foundPossibleVal = True
                     break
+            # If you didn't find a possible value: yVal, then that particular value: xVal won't work
             if foundPossibleVal == False:
                 valuesToRemove.add(xVal)
                 revised = True
 
+        # Remove all values from x's domain that won't work for y
         for value in valuesToRemove:
             self.domains[x].remove(value)
 
@@ -159,9 +164,12 @@ class CrosswordCreator():
 
         while len(pairsToProcess) != 0:
             pair = pairsToProcess.pop()
+
+            # Check if the first variable in pair was revised to be arc-consistent
             if self.revise(pair[0], pair[1]):
                 if len(self.domains[pair[0]]) == 0:
                     return False
+                # Since the first var in pair was revised, make sure the neighbors of that variable are still arc-consistent
                 for neighbor in self.crossword.neighbors(pair[0]):
                     pairsToProcess.add((neighbor, pair[0]))
         return True
@@ -171,9 +179,12 @@ class CrosswordCreator():
         Return True if `assignment` is complete (i.e., assigns a value to each
         crossword variable); return False otherwise.
         """
+
+        # Make sure all variables are in the assignment
         for var in self.crossword.variables:
             if var not in assignment.keys():
                 return False
+
         return True
 
     def consistent(self, assignment):
@@ -182,11 +193,13 @@ class CrosswordCreator():
         puzzle without conflicting characters); return False otherwise.
         """
         for xVar in assignment:
+            # Make sure the word's length and the variables length match
             if xVar.length != len(assignment[xVar]):
                 return False
 
             for yVar in assignment:
                 if xVar != yVar:
+                    # Make sure no variables are assigned to the same value
                     if assignment[xVar] == assignment[yVar]:
                         return False
                     
@@ -194,6 +207,7 @@ class CrosswordCreator():
                     if overlap == None:
                         continue
 
+                    # Make sure characters of the word at overlap(if it exists) are the same
                     if assignment[xVar][overlap[0]] != assignment[yVar][overlap[1]]:
                         return False
 
@@ -206,6 +220,7 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
+        # Temporary
         return self.domains[var]
 
     def select_unassigned_variable(self, assignment):
@@ -216,6 +231,7 @@ class CrosswordCreator():
         degree. If there is a tie, any of the tied variables are acceptable
         return values.
         """
+        # Temporary
         for var in self.crossword.variables:
             if var not in assignment.keys():
                 return var
@@ -234,10 +250,18 @@ class CrosswordCreator():
         else:
             var = self.select_unassigned_variable(assignment)
             
+            # Choose a variable to start and loop through the possible domain values of that variable
             for value in self.order_domain_values(var, assignment):
                 assignment[var] = value
+
+                # Make sure the assignment with the new value doesn't cause a contradiction
                 if self.consistent(assignment):
+
+                    # If it doesn't, continue the backtrack process with the new assignment
                     result = self.backtrack(assignment)
+
+                    # If result is successful, return that result. Otherwise, the variable can't be assigned
+                    # to the current value so continue testing more values in var's domain
                     if result != None:
                         return result
                     assignment[var] = None
