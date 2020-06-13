@@ -17,7 +17,7 @@ CS50's Introduction to Artificial Intelligence with Python
 - [PageRank](https://github.com/itsmihirrao/CS50AI/tree/master/Week2_Uncertainty/pagerank)
 - [Heredity](https://github.com/itsmihirrao/CS50AI/tree/master/Week2_Uncertainty/heredity)
 
-## [Week 2 - Uncertainty:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week2_Uncertainty.md)
+## [Week 3 - Optimization:](https://github.com/itsmihirrao/CS50AI/blob/master/LectureNotes/Week3_Optimization.md)
 
 - [Crossword](https://github.com/itsmihirrao/CS50AI/tree/master/Week3_Optimization/crossword)
 
