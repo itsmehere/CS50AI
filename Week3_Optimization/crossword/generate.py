@@ -236,10 +236,15 @@ class CrosswordCreator():
         minLength = math.inf
 
         for var in self.crossword.variables:
+            # If the value isn't already in the assignment
             if var not in assignment.keys():
+
+                # If the variable's domain length is shorter than the current variable's domain length, update optimalVar
                 if len(self.domains[var]) < minLength:
                     minLength = len(self.domains[var])
                     optimalVar = var
+
+                # If they are equal, choose the optimalVar based on number of neighbors
                 elif len(self.domains[var]) == minLength:
                     if len(self.crossword.neighbors(var)) > len(self.crossword.neighbors(optimalVar)):
                         minLength = len(self.domains[var])
