@@ -1,5 +1,6 @@
 import sys
 import copy
+import math
 
 from crossword import *
 
@@ -231,10 +232,20 @@ class CrosswordCreator():
         degree. If there is a tie, any of the tied variables are acceptable
         return values.
         """
-        # Temporary
+        optimalVar = []
+        minLength = math.inf
+
         for var in self.crossword.variables:
             if var not in assignment.keys():
-                return var
+                if len(self.domains[var]) < minLength:
+                    minLength = len(self.domains[var])
+                    optimalVar = var
+                elif len(self.domains[var]) == minLength:
+                    if len(self.crossword.neighbors(var)) > len(self.crossword.neighbors(optimalVar)):
+                        minLength = len(self.domains[var])
+                        optimalVar = var
+
+        return optimalVar                
 
     def backtrack(self, assignment):
         """
