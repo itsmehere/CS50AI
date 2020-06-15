@@ -59,41 +59,41 @@ C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.p
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words1.txt
 █BIT█
-█A██L
-█Y██I
-█E██N
+█A██B
+█Y██Y
+█E██T
 █SINE
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words2.txt
-█SKY█
+█SIT█
 █A██P
-█L██L
-█E██A
-█SIGN
+█L██I
+█E██P
+█SAFE
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words0.txt
 No solution.
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words1.txt
 ██████████████
-███████M████N█
+███████M████R█
 █INTELLIGENCE█
-█N█████N████T█
-█F██LOGIC███W█
-█E█████M████O█
-█R███SEARCH█R█
-███████X████K█
+█N█████N████S█
+█F██LOGIC███O█
+█E█████M████L█
+█R███SEARCH█V█
+███████X████E█
 ██████████████
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words2.txt
 ██████████████
-███████B████W█
-█CONSIDERABLE█
-█O█████N████A█
-█A██INDEX███L█
-█C█████A████T█
-█H███LATTER█H█
-███████H████Y█
+███████L████R█
+█SIGNIFICANCE█
+█C█████C████C█
+█A██AFTER███R█
+█L█████N████U█
+█E███RESULT█I█
+███████E████T█
 ██████████████
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words0.txt
@@ -108,12 +108,12 @@ E██R██T
 █BIT██E
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words2.txt
-██████T
-HOLE██W
+██████C
+PIPE██R
 A██LAKE
-T██I██N
-E██T██T
-█SEE██Y
+I██I██D
+R██T██I
+█USE██T
 ```
 
 ## Other Links:
