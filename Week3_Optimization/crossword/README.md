@@ -48,69 +48,6 @@ python generate.py data/structure0.txt data/words0.txt
 
 ## My Output:
 
-Without heuristics:
-```
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words0.txt  
-█SIX█  
-█E██F  
-█V██I  
-█E██V  
-█NINE  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words1.txt  
-█BIT█  
-█A██L  
-█Y██I  
-█E██N  
-█SINE  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words2.txt  
-█PAN█  
-█H██S  
-█O██A  
-█N██L  
-█EAST  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words0.txt  
-No solution.  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words1.txt  
-██████████████  
-███████M████R█  
-█INTELLIGENCE█  
-█N█████N████S█  
-█F██LOGIC███O█  
-█E█████M████L█  
-█R███SEARCH█V█  
-███████X████E█  
-██████████████  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words2.txt  
-██████████████  
-███████C████A█  
-█PSYCHOLOGIST█  
-█A█████E████T█  
-█R██ESSAY███E█  
-█T█████R████M█  
-█Y███POLICE█P█  
-███████Y████T█  
-██████████████  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words0.txt  
-No solution.  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words1.txt  
-██████C  
-LOSS██R  
-I██TRUE  
-N██A██A  
-E██R██T  
-█BIT██E  
-
-C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words2.txt  
-No solution.
-```
-
 With heuristics:
 ```
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words0.txt
