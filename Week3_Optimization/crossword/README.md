@@ -47,6 +47,8 @@ python generate.py data/structure0.txt data/words0.txt
 ```
 
 ## My Output:
+
+Without heuristics:
 ```
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words0.txt  
 █SIX█  
@@ -107,6 +109,74 @@ E██R██T
 
 C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words2.txt  
 No solution.
+```
+
+With heuristics:
+```
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words0.txt
+█SIX█
+█E██F
+█V██I
+█E██V
+█NINE
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words1.txt
+█BIT█
+█A██L
+█Y██I
+█E██N
+█SINE
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure0.txt data/words2.txt
+█SKY█
+█A██P
+█L██L
+█E██A
+█SIGN
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words0.txt
+No solution.
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words1.txt
+██████████████
+███████M████N█
+█INTELLIGENCE█
+█N█████N████T█
+█F██LOGIC███W█
+█E█████M████O█
+█R███SEARCH█R█
+███████X████K█
+██████████████
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure1.txt data/words2.txt
+██████████████
+███████B████W█
+█CONSIDERABLE█
+█O█████N████A█
+█A██INDEX███L█
+█C█████A████T█
+█H███LATTER█H█
+███████H████Y█
+██████████████
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words0.txt
+No solution.
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words1.txt
+██████C
+LOSS██R
+I██TRUE
+N██A██A
+E██R██T
+█BIT██E
+
+C:\Users\mihir\Programming\CS50AI\Week3_Optimization\crossword>python generate.py data/structure2.txt data/words2.txt
+██████T
+HOLE██W
+A██LAKE
+T██I██N
+E██T██T
+█SEE██Y
 ```
 
 ## Other Links:
