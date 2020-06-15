@@ -221,8 +221,42 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        # Temporary
-        return self.domains[var]
+        varElimPairs = []
+        orderedDomains = []
+
+        # Get the number of eliminations the current assignment will cause
+        for value in self.domains[var]:
+            numEliminations = self.elims(var, value, assignment)
+            # Add value, elim pairs to the data structure
+            varElimPairs.append((value, numEliminations))
+
+        # For each pair in the sorted list(sorted by number of elims), add the value to a list
+        for pair in sorted(varElimPairs, key=lambda varPair: varPair[1]):
+            orderedDomains.append(pair[0])
+
+        return orderedDomains
+            
+    def elims(self, var, value, assignment):
+        # Total number of eliminations var = value causes
+        numElims = 0
+
+        for neighbor in self.crossword.neighbors(var):
+            # If the neighboring variable to var is not already assigned a value...
+            if neighbor not in assignment.keys():
+
+                # If the value is in a neighbor's domain, increment numElims(no variables can have the same value)
+                if value in self.domains[neighbor]:
+                    numElims += 1
+                else:
+                    # For each value in neighbor, check if overlap remains consistent
+                    for neighborValue in self.domains[neighbor]:
+                        overlap = self.crossword.overlaps[var, neighbor]
+                        
+                        # If characters at an overlapping point are not equal, increment numElims
+                        if value[overlap[0]] != neighborValue[overlap[1]] and value != neighborValue:
+                            numElims += 1
+
+        return numElims
 
     def select_unassigned_variable(self, assignment):
         """
