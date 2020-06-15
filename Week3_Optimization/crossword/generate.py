@@ -284,7 +284,7 @@ class CrosswordCreator():
                         minLength = len(self.domains[var])
                         optimalVar = var
 
-        return optimalVar                
+        return optimalVar
 
     def backtrack(self, assignment):
         """
@@ -297,24 +297,26 @@ class CrosswordCreator():
         """
         if self.assignment_complete(assignment):
             return assignment
-        else:
-            var = self.select_unassigned_variable(assignment)
-            
-            # Choose a variable to start and loop through the possible domain values of that variable
-            for value in self.order_domain_values(var, assignment):
-                assignment[var] = value
 
-                # Make sure the assignment with the new value doesn't cause a contradiction
-                if self.consistent(assignment):
+        var = self.select_unassigned_variable(assignment)
+        
+        # Choose a variable to start and loop through the possible domain values of that variable
+        for value in self.order_domain_values(var, assignment):
+            assignment[var] = value
 
-                    # If it doesn't, continue the backtrack process with the new assignment
-                    result = self.backtrack(assignment)
+            # Make sure the assignment with the new value doesn't cause a contradiction
+            if self.consistent(assignment):
 
-                    # If result is successful, return that result. Otherwise, the variable can't be assigned
-                    # to the current value so continue testing more values in var's domain
-                    if result != None:
-                        return result
-                    assignment[var] = None
+                # If it doesn't, continue the backtrack process with the new assignment
+                result = self.backtrack(assignment)
+
+                # If result is successful, return that result. Otherwise, the variable can't be assigned
+                # to the current value so continue testing more values in var's domain
+                if result is not None:
+                    return result
+            assignment[var] = None
+
+        return None
 
 def main():
 
