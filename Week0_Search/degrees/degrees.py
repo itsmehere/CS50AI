@@ -127,7 +127,6 @@ def shortest_path(source, target):
                     exploredNodes.add(neighborsNode)
     
 
-
 def person_id_for_name(name):
     """
     Returns the IMDB id for a person's name,
@@ -145,7 +144,7 @@ def person_id_for_name(name):
             print(f"ID: {person_id}, Name: {name}, Birth: {birth}")
         try:
             person_id = input("Intended Person ID: ")
-            if person_id in person_ids  :
+            if person_id in person_ids:
                 return person_id
         except ValueError:
             pass
