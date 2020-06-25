@@ -8,7 +8,7 @@ Given a data set of input-output pairs, learn a function to map inputs to output
 
 ## Classification:
 
-Supervised learning task of learning a function mapping an input point to a dicrete category. For example, if we wanted to figure out whether it was going to rain tomorrow, based on past experiences/data, the computer should be able to draw reasonable conclusions. We have already taken a look at how to approach similar problems using probability but we won't always have definite probabilities that we use. Machine learning algorithms focus more on the idea of using historical data instead. An example of historical data could be the following:  
+Supervised learning task of learning a function mapping an input point to a discrete category. For example, if we wanted to figure out whether it was going to rain tomorrow, based on past experiences/data, the computer should be able to draw reasonable conclusions. We have already taken a look at how to approach similar problems using probability but we won't always have definite probabilities that we use. Machine learning algorithms focus more on the idea of using historical data instead. An example of historical data could be the following:  
 [Markdown Table Generator](https://github.com/itsmihirrao/MarkdownTableGenerator)
 
 |Date     |Humidity|Pressure|Rain   |
@@ -51,7 +51,7 @@ Algorithm that, given an input, chooses the class of the nearest data point to t
 
 ### _k_-Nearest-Neighbor Classification:
 
-Algorithm that, given an input, chooses the most common class out of the _k_ nearest data points to that input. This is a much better approach because it takes into consideration "location" of the data point and doesn't reach conclusions based on just one neighbor. However, this algrithm also has a few downsides:
+Algorithm that, given an input, chooses the most common class out of the _k_ nearest data points to that input. This is a much better approach because it takes into consideration "location" of the data point and doesn't reach conclusions based on just one neighbor. However, this algorithm also has a few downsides:
 
 - It could be slow to go through every neighbor and measure distance(there are optimizations).
   - Data pruning
@@ -115,11 +115,18 @@ To represent this more logically, we can use soft thresholds instead.
 
 Now, as the output from the dot product gets larger and larger, we can conclude the outcome with more certainty. In other words, the output isn't restricted to either 1 or 0 and this allows to express likeliness and probability.
 
+### Summary: 
+
+Given some vector of weights that have been determined by past data, our hypothesis function will determine which class an input belongs to. The problem then, is to find a vector of weights that are representative of our data. At first, we can set the weights to random values and as we run the simulations with the training data, the weights will start to become more and more accurate. Changing the weights will use our hypothesis function which, intern, will use the weights.
+
+- Perceptron can only be used where there is a maximum of 2 classes(ex: rain/no rain)
+- Perceptron doesn't care about how close the boundary is to the data(this can lead to lower precision/accuracy).
+ 
 ## Support Vector Machines:
 
 ### Maximum Margin Separator:
 
-Boundary that maximizes the distance between any of the data points. In some cases, drawing boundaries may be rather aribtrary. For example, there isn't always just 1 way you can draw a line between data points and this ultimately leads to other problems:
+Boundary that maximizes the distance between any of the data points. In some cases, drawing boundaries may be rather arbitrary. For example, there isn't always just 1 way you can draw a line between data points and this ultimately leads to other problems:
 
 - Data points for whom we want to predict the outcome could be really close to both data sets.
 - This makes predicting outcomes hard.
@@ -132,7 +139,7 @@ Example:
 
 ### Regression:
 
-**Supervised learning task of learning a function mapping an input point to a continuous value.** Instead of creating boundaries, we can try to find the line of best fit and use that as a refernce to determine the result.
+**Supervised learning task of learning a function mapping an input point to a continuous value.** Instead of creating boundaries, we can try to find the line of best fit and use that as a reference to determine the result.
 
 ## Loss Functions:
 
@@ -187,3 +194,7 @@ Splitting data into a training set and a test set, such that learning happens on
 ## _k_-Fold Cross-Validation:
 
 Splitting data into _k_ sets, and experimenting _k_ times, using each set as a test set once, and using remaining data as training set.
+
+## Reinforcement Learning:
+
+Given a set of rewards or punishments, learn what actions to take in the future.
