@@ -105,7 +105,7 @@ If the actual value was equal to the value we predicted, then the right side of 
 
 ### Hard & Soft Threshold:
 
-One problem with our function is that it will always choose rain or no rain. In some cases, this may be what we want but if a data point is close the boundaries, it may not make sense to make such a definite conclusion. Looking at the image below, we see that if the value resulting from the dot product is barely to the right of the vertical line(the threshold), we strongly conclude a value of 1.
+One problem with our function is that it will always choose rain or no rain. In some cases, this may be what we want but if a data point is close to the boundaries, it may not make sense to make such a definite conclusion. Looking at the image below, we see that if the value resulting from the dot product is barely to the right of the vertical line(the threshold), we strongly conclude a value of 1.
 
 ![hardThreshold](images/4_Learning/hardThreshold.png)
 
@@ -179,7 +179,7 @@ _cost(h)_ = _loss(h)_ + _complexity(h)_
 
 ## Regularization:
 
-Penalizing hypotheses thar are more complex to favor simpler, more general hypotheses.
+Penalizing hypotheses that are more complex to favor simpler, more general hypotheses.
 
 In the above equation, we would like to penalize boundaries that are complex more than boundaries that are less complex.
 
@@ -198,3 +198,86 @@ Splitting data into _k_ sets, and experimenting _k_ times, using each set as a t
 ## Reinforcement Learning:
 
 Given a set of rewards or punishments, learn what actions to take in the future.
+
+![reinforcementLearning](images/4_Learning/reinforcement.png)
+
+Given that the agent is in some sort of state, the agent has to take an action and in return, will get either a reward or a punishment. It ends up in a new state and repeats the same process. In order to formulate these worlds, we'll use something known as the Markov Decision Process.
+
+### Markov Decision Process:
+
+Model for decision making, representing states, actions, and their rewards. Similar to markov chains where the action-state path is linear, this process has more of a tree-like structure where each state has multiple different possible actions. Also, In a markov chain, the transition between one state to another is purely based on probability. In this case, we will assign rewards/punishments to each possible action and that will be the determining factor of what action the AI chooses.
+
+Main ideas:
+- Set of states: _S_
+- Set of actions: _ACTIONS(s)_ 
+- Transition model: _P_(_s'_ | _s_,_a_)
+- Reward function: _R_(_s_, _a_, _s'_)
+
+### Q-Learning
+
+Method for learning a function _Q_(_s_,_a_) estimate of the value(reward) of performing action _a_ in state _s_
+
+- Start with _Q_(_s_, _a_) = 0 for all _s_,_a_
+- When we take an action and receive a reward:
+  - Estimate the value of _Q_(_s_, _a_) based on current reward and expected future rewards
+  - Update _Q_(_s_, _a_) to take into account old estimate as well as our new estimate
+
+Approach:
+
+- Start with _Q_(_s_, _a_) = 0 for all _s_,_a_
+- Every time we take an action _a_ in state _s_ and observe a reward _r_, we update:  
+  _Q_(_s_, _a_) ← _Q_(_s_, _a_) + _a_(new value estimate - old value estimate)  
+  **OR:**  
+  _Q_(_s_, _a_) ← _Q_(_s_, _a_) + _a_((_r_ + future reward estimate) - _Q_(_s_, _a_))  
+  **OR:** include γ if we wanted to weight future rewards less than current reward: _r_  
+  _Q_(_s_, _a_) ← _Q_(_s_, _a_) + _a_((_r_ + γ⋅max<sub>a'</sub>_Q_(_s'_, _a'_)) - _Q_(_s_, _a_))
+
+### Greedy Decision-Making & Explore vs. Exploit:
+
+- When in state _s_ choose action _a_ with highest _Q_(_s_, _a_)
+
+Although this works, there are downsides to this approach. The path the agent takes may not be the optimal path. Although it will find a path that works, it will continue to always use that path and won't explore choices that could possibly lead to the reward but also be shorter.
+
+**Exploration:** Exploring other actions that may be faster and lead to larger rewards.
+**Exploitation:** Knowledge that the AI already has.
+
+### Ɛ-Greedy:
+
+Rather than choose the best move all the time, Ɛ-greedy using a damping factor similar to `d` in pagerank
+
+- Set Ɛ equal to how often we want to move randomly.
+- With probability 1 - Ɛ, choose estimated best move.
+- With probability Ɛ, choose a random move.
+
+### Function Approximation:
+
+Approximating _Q_(_s_, _a_), often by a function combining various features, rather than storing one value for every state-action pair.
+
+For games like chess where the number of state-action possibilities are really high, it's unfeasible to calculate _Q_(_s_, _a_) values for all of them.
+
+## Unsupervised Learning:
+
+Given input data without any additional feedback, learn patterns
+
+### Clustering:
+
+Organizing a set of objects into groups in such a way that similar objects tend to be in the same group
+
+Clustering Applications:
+- Genetic research
+- Image segmentation
+- Market research
+- Medical imaging
+- Social network analysis
+
+### _k_-Means Clustering:
+
+Algorithm for clustering data based on repeatedly assigning points to clusters and updating those clusters' centers.
+
+Here is an example where we randomly chose 3 cluster centers and assigned points to them based on distance:
+
+![clusterCenter](images/4_Learning/clustercenters.png) → ![clusters](images/4_Learning/clusters.png)
+
+Since this clustering algorithm is an iterative process, the centers aren't fixed to where they are now. As we can see, the data in the red and greed clusters are not very close together. The next step in this process would be to move the cluster centers to the average of all the points in that cluster. Then, re-assign the points to the new clusters and continue this process until no points change in assignment. At this point, we can say that the data is reasonably well clustered.
+
+![movedcenters](images/4_Learning/movedcenters.png) → ![movedcenters](images/4_Learning/finalCluster.png)
