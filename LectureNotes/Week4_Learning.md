@@ -238,12 +238,12 @@ Approach:
 
 Although this works, there are downsides to this approach. The path the agent takes may not be the optimal path. Although it will find a path that works, it will continue to always use that path and won't explore choices that could possibly lead to the reward but also be shorter.
 
-**Exploration:** Exploring other actions that may be faster and lead to larger rewards.
+**Exploration:** Exploring other actions that may be faster and lead to larger rewards.  
 **Exploitation:** Knowledge that the AI already has.
 
 ### Ɛ-Greedy:
 
-Rather than choose the best move all the time, Ɛ-greedy using a damping factor similar to `d` in pagerank
+Rather than choose the best move all the time, Ɛ-greedy using a damping factor similar to `d` in [pagerank](https://github.com/itsmehere/CS50AI/tree/master/Week2_Uncertainty/pagerank)
 
 - Set Ɛ equal to how often we want to move randomly.
 - With probability 1 - Ɛ, choose estimated best move.
