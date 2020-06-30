@@ -10,7 +10,7 @@ The goal of Minesweeper is to uncover all the squares on a grid that do not cont
 
 ## Getting Started
 
-- Once in the directory for the project, run `pip3 install -r requirements.txt` to install the required Python package (`pygame`) for this project if you don’t already have it installed.
+- Once in the directory for the project, run `pip3 install -r requirements.txt` to install the required Python package (`pygame`) for this project if not already have it installed.
 
 ## Understanding
 
