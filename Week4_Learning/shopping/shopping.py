@@ -1,4 +1,4 @@
-from csv import reader
+import csv
 import sys
 import calendar
 
@@ -68,7 +68,7 @@ def load_data(filename):
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     with open(filename, 'r') as f:
-        csvReader = reader(f)
+        csvReader = csv.reader(f)
         header = next(csvReader)
 
         if header != None:
