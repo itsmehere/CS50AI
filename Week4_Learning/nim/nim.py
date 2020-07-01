@@ -280,7 +280,7 @@ def play(ai, human_player=None):
         # Have AI make a move
         else:
             print("AI's Turn")
-            pile, count = ai.choose_action(game.piles, epsilon=False)
+            pile, count = ai.choose_action(game.piles, epsilon=True)
             print(f"AI chose to take {count} from pile {pile}.")
 
         # Make move
