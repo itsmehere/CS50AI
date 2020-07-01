@@ -21,10 +21,10 @@ CS50's Introduction to Artificial Intelligence with Python
 
 - [Crossword](https://github.com/itsmehere/CS50AI/tree/master/Week3_Optimization/crossword)
 
-## Week 4 - Learning:
+## [Week 4 - Learning](https://github.com/itsmehere/CS50AI/blob/master/LectureNotes/Week4_Learning.md): ✔️
 
-- Shopping
-- Nim
+- [Shopping](https://github.com/itsmehere/CS50AI/tree/master/Week4_Learning/shopping)
+- [Nim](https://github.com/itsmehere/CS50AI/tree/master/Week4_Learning/nim)
 
 ## Week 5 - Neural Networks:
 
