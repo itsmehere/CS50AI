@@ -114,3 +114,25 @@ Temporarily removing units that are selected at random from a neural network to 
 ![dropout](images/5_NeuralNetworks/dropout.png)
 
 ## TensorFlow:
+
+A free and open-source software library developed by Google Brain([read more](https://www.tensorflow.org/)). 
+
+### Playground:
+
+Using the [tensor flow playground](playground.tensorflow.org), we can demonstrate some of the ideas discussed above.
+
+Below, we can see a direct linkage from the input to the output and this works because the data is linearly separable.
+
+![linear](images/5_NeuralNetworks/TensorFlowImgs/linear.png)
+
+If we change the data set to one that is not as easily separable, we can't draw an accurate boundary.
+
+![linear](images/5_NeuralNetworks/TensorFlowImgs/failedLinear.png)
+
+When we add a hidden layer, we see that although it is better than before, it is still not the type we would like.
+
+![linear](images/5_NeuralNetworks/TensorFlowImgs/failedHidden.png)
+
+We can introduce more hidden layers and/or more units in each hidden layer to create different combinations of activation functions. This will allow our network to learn how to separate data that isn't always going to be linearly distributed.
+
+![linear](images/5_NeuralNetworks/TensorFlowImgs/nonLinear.png)
