@@ -107,13 +107,17 @@ If the actual value was equal to the value we predicted, then the right side of 
 
 One problem with our function is that it will always choose rain or no rain. In some cases, this may be what we want but if a data point is close to the boundaries, it may not make sense to make such a definite conclusion. Looking at the image below, we see that if the value resulting from the dot product is barely to the right of the vertical line(the threshold), we strongly conclude a value of 1.
 
-![hardThreshold](images/4_Learning/hardThreshold.png)
+![step](images/4_Learning/classificationFunctions/step.png)
 
 To represent this more logically, we can use soft thresholds instead.
 
-![hardThreshold](images/4_Learning/softThreshold.png)
+![sigmoid](images/4_Learning/classificationFunctions/sigmoid.png)
 
 Now, as the output from the dot product gets larger and larger, we can conclude the outcome with more certainty. In other words, the output isn't restricted to either 1 or 0 and this allows to express likeliness and probability.
+
+### Other Classification Functions:
+
+![ReLU](images/4_Learning/classificationFunctions/relu.png)
 
 ### Summary: 
 
