@@ -33,4 +33,51 @@ The input to _g_ can be simplified to _g_(-1 + 1(1) + 1(0)), or _g_(0) when we s
 |0 |1 |0      |1     |
 |1 |1 |1      |1     |
 
-Similarly, if we wanted to implement a neural network to be able to function as **and**, we can change the bias to -2 instead of -1 so that 0 will only be reached if both _x_<sub>1</sub> and _x_<sub>2</sub> are 1.
+Similarly, if we wanted to implement a neural network to be able to function as **and**, we can change the bias to -2 instead of -1 so that 0 will only be reached if both _x_<sub>1</sub> and _x_<sub>2</sub> are 1. However, what if we wanted to have more that just 2 inputs? Neural Networks allow us to link together as many units as we want in any arrangment. For example, if we wanted 5 inputs to lead to 1 output, we could draw the structue and it would look something like this.
+
+![nnStructure](images/5_NeuralNetworks/5inputs.png)
+
+## Gradient Descent:
+
+An algorithm for minimizng loss when training neural network.
+
+- Start with a random choice of weights
+- Repeat:
+  - Calculate the gradient based on **all data points**: direction that will lead to decreasing loss
+  - Update weights according to the gradient
+
+One possible issue with the approach above is that for every update, we'll have to re-calculate the gradient based on **all data points** and that can be very expensive, or time consuming. With a similar algorithm called stochastic gradient descent, we'll ultimately be able to do this faster.
+
+### Stochastic Gradient Descent:
+
+- Start with a random choice of weights
+- Repeat:
+  - Calculate the gradient based on **one data point**: direction that will lead to decreasing loss
+  - Update weights according to the gradient
+
+Like always, this algorithm has its own downsides. Although it is a lot less expensive in terms of time, the result will definitely give us a less accurate result. So, we can look at another very similar algorithm called mini-batch.
+
+### Mini-Batch Gradient Descent:
+
+- Start with a random choice of weights
+- Repeat:
+  - Calculate the gradient based on **one small batch**: direction that will lead to decreasing loss
+  - Update weights according to the gradient
+
+This can be considered the middle ground in terms of gradient accuracy and time complexity.
+
+## Multiple Outputs:
+
+The above neural network structure is limited in the sense that there is only one unit as the output. This is useful when we are doing binary classifications like rain/no rain but what if we wanted to predict weather in the areas of rain, sun, clouds, and snow. To do this, we can introduce more units to the output and construct a neural network that looks like this:
+
+![nnStructure](images/5_NeuralNetworks/multipleOutputs.png)
+
+Now, there would be 4 different sets of weights used for each output. Now that we have looked at a simple neural network and discussed some variants, it's important to also discuss possible limitations of this approach. With perceptron, a linear combination of weights and inputs, we will only be able to do binary classification(classify data points given a data set that is **linearly separable**).
+
+## Multilayer Neural Networks:
+
+Artificial neural network with an input layer, an output layer, and at least one hidden layer
+
+![nnStructure](images/5_NeuralNetworks/multilayerNN.png)
+
+In this case, the hidden layer has 4 nodes/units but we will ultimately be able to choose how many we would like to have. As we can see, the inputs aren't directly linked to the outputs. They first link to the hidden layer, which intern, links to the output.
