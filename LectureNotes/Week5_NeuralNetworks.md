@@ -119,7 +119,7 @@ A free and open-source software library developed by Google Brain([read more](ht
 
 ### Playground:
 
-Using the [tensor flow playground](playground.tensorflow.org), we can demonstrate some of the ideas discussed above.
+Using the [tensor flow playground](http://playground.tensorflow.org), we can demonstrate some of the ideas discussed above.
 
 Below, we can see a direct linkage from the input to the output and this works because the data is linearly separable.
 
