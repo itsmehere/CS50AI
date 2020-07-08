@@ -7,7 +7,7 @@ Biological neural networks are a system in the human body that consist of three 
 - Mathematical model for learning inspired by biological neural networks that constitute animal brains. It works by mapping inputs to outputs based on the structure and parameters of the network.
 - Allows for learning the network's parameters based on data.
 
-To model this in our computer, we'll use an artificial neuron known as a unit. Units can connect to each other in different ways to map outputs to inputs. The main goal of these units is to work together to solve a certain problem with a unique configuration of outputs to inputs.
+To model this in our computer, we'll use an artificial neuron known as a unit. Units can connect in different ways to map outputs to inputs. The main goal of these units is to work together to solve a certain problem with a unique configuration of outputs to inputs.
 
 ## Neural Network Structure:
 
@@ -33,13 +33,13 @@ The input to _g_ can be simplified to _g_(-1 + 1(1) + 1(0)), or _g_(0) when we s
 |0 |1 |0      |1     |
 |1 |1 |1      |1     |
 
-Similarly, if we wanted to implement a neural network to be able to function as **and**, we can change the bias to -2 instead of -1 so that 0 will only be reached if both _x_<sub>1</sub> and _x_<sub>2</sub> are 1. However, what if we wanted to have more that just 2 inputs? Neural Networks allow us to link together as many units as we want in any arrangment. For example, if we wanted 5 inputs to lead to 1 output, we could draw the structue and it would look something like this.
+Similarly, if we wanted to implement a neural network to be able to function as **and**, we can change the bias to -2 instead of -1 so that 0 will only be reached if both _x_<sub>1</sub> and _x_<sub>2</sub> are 1. However, what if we wanted to have more than just 2 inputs? Neural Networks allow us to link together as many units as we want in any arrangement. For example, if we wanted 5 inputs to lead to 1 output, we could draw the structure and it would look something like this.
 
 ![5inputs](images/5_NeuralNetworks/5inputs.png)
 
 ## Gradient Descent:
 
-An algorithm for minimizng loss when training neural network.
+An algorithm for minimizing loss when training a neural networks.
 
 - Start with a random choice of weights
 - Repeat:
@@ -55,7 +55,7 @@ One possible issue with the approach above is that for every update, we'll have 
   - Calculate the gradient based on **one data point**: direction that will lead to decreasing loss
   - Update weights according to the gradient
 
-Like always, this algorithm has its own downsides. Although it is a lot less expensive in terms of time, the result will definitely give us a less accurate result. So, we can look at another very similar algorithm called mini-batch.
+Like always, this algorithm has its downsides. Although it is a lot less expensive in terms of time, the result will give us a less accurate result. So, we can look at another very similar algorithm called mini-batch.
 
 ### Mini-Batch Gradient Descent:
 
@@ -149,11 +149,11 @@ We can then construct a neural network that has as many inputs as pixels and usi
 
 ![imageExampleNN](images/5_NeuralNetworks/imgNNExample.png)
 
-the drawbacks of this approach is that there will a lot of weights for us to calculate especially when the image is large. Perhaps the major drawback is that by flattening the pixels into a single input layer, we lose the image structure like curves, lines, and other features.
+the drawbacks of this approach are that there will a lot of weights for us to calculate especially when the image is large. Perhaps the major drawback is that by flattening the pixels into a single input layer, we lose the image structure like curves, lines, and other features.
 
 ## Image Convolution:
 
-Applying a filter that adds each pixel value of an image to its neighbors, weighted accoridng to a kernel matrix.
+Applying a filter that adds each pixel value of an image to its neighbors, weighted according to a kernel matrix.
 
 Image Convolution Example:  
 ![kernelMatrix](images/5_NeuralNetworks/kernelMatrix.png)
@@ -196,7 +196,7 @@ Why might the above be useful? Let's take another example of a kernel matrix tha
 |-1|&nbsp;8|-1|
 |-1|-1|-1|
 
-And a image that looks like this:
+And an image that looks like this:
 
 |  |  |  |
 |--|--|--|
@@ -217,7 +217,7 @@ Pooling by choosing maximum value in a particular region.
 ![mp1](images/5_NeuralNetworks/mp1.png) ![mp2](images/5_NeuralNetworks/mp2.png)  
 ![mp3](images/5_NeuralNetworks/mp3.png) ![mp4](images/5_NeuralNetworks/mp4.png)
 
-Now, we have a smaller representation of the original image and we are able to exclude specific pixels; meaning we don't care about which exact pixels are filled with what color.
+Now, we have a smaller representation of the original image and we can exclude specific pixels; meaning we don't care about which exact pixels are filled with what color.
 
 ## Convolutional Neural Networks:
 
@@ -225,7 +225,7 @@ Neural Networks that use convolution, usually for analyzing images.
 
 - Start with image
 - Use convolution to extract specific feature maps
-  - Each map represent a unique characteristic i.e. curves, edges, shapes, etc...
+  - Each map represents a unique characteristic i.e. curves, edges, shapes, etc...
   - Train neural networks to figure out values of kernel matrix
 - Apply Pooling Algorithm to scale image down i.e. max-pooling, average pooling
 - Flatten into the neural network as input 
@@ -245,3 +245,26 @@ Second Convolution & Pooling:
   - objects
 
 Although we can have a bunch of layers and a bunch of units that try and classify images, convolutional networks and techniques come in quite handy in terms of optimization. On a higher level, when humans classify images, we don't look at every pixel to see if they're matching. Generally, we identify curves and then colors and maybe some other features depending on what we are trying to find. Convolution algorithms try to do the same thing.
+
+## Feed-Forward Neural Network:
+
+Neural Network that has connections only in one direction
+
+![ffNN](images/5_NeuralNetworks/ffNN.png)
+
+- Output is based purely on the input and calculation in the network. 
+- Number of input & output is fixed. 
+   
+This is problematic when we want to describe a picture like, "A group of people walking in front of a building." We don't know the length of the text we want to output.
+
+## Recurrent Neural Networks:
+
+Neural Network that generates output that feeds back into its inputs
+
+This allows the network to remember information that may be useful when dealing with sequences of data. Example: [Microsoft CaptionBot](https://www.captionbot.ai/) In the example above where we would like the output to be multiple words or a sentence describing the image, recurrent neural networks would come in handy because each output(a different word) is fed back into the same network to produce yet another output.
+
+![wordRecurrentNN](images/5_NeuralNetworks/wordRecurrentNN.png)
+
+Another major application of recurrent neural networks is video processing. Videos are much harder to process than images because, in images, you can treat each pixel as a value but in videos, they're sequences of images/frames. Each time, the input is a new frame and when the next frame is processed, the network uses information from the previous network and previous input. In the last frame, we can output the final result.
+
+![multipleInputRecurrent](images/5_NeuralNetworks/multipleInputRecurrent.png)
