@@ -127,12 +127,121 @@ Below, we can see a direct linkage from the input to the output and this works b
 
 If we change the data set to one that is not as easily separable, we can't draw an accurate boundary.
 
-![linear](images/5_NeuralNetworks/TensorFlowImgs/failedLinear.png)
+![failedLinear](images/5_NeuralNetworks/TensorFlowImgs/failedLinear.png)
 
 When we add a hidden layer, we see that although it is better than before, it is still not the type we would like.
 
-![linear](images/5_NeuralNetworks/TensorFlowImgs/failedHidden.png)
+![failedHidden](images/5_NeuralNetworks/TensorFlowImgs/failedHidden.png)
 
 We can introduce more hidden layers and/or more units in each hidden layer to create different combinations of activation functions. This will allow our network to learn how to separate data that isn't always going to be linearly distributed.
 
-![linear](images/5_NeuralNetworks/TensorFlowImgs/nonLinear.png)
+![nonLinear](images/5_NeuralNetworks/TensorFlowImgs/nonLinear.png)
+
+## Computer Vision:
+
+Computational methods for analyzing and understanding digital images
+
+If we wanted to train an AI to be able to identify different handwritten digits, it would be very unreliable to go through each pixel and check if it is equal to an example. Even if the handwritten digit is 1 pixel off, the AI would classify it differently. To make this more reliable, we can once again use neural networks. Imagine we had a digital image(where each pixel has a RGB value (0-255, 0-255, 0-255)) like this:
+
+![28](images/5_NeuralNetworks/28.png)
+
+We can then construct a neural network that has as many inputs as pixels and using amount of hidden layers, train the network to classify the image. It could look something like this:
+
+![imageExampleNN](images/5_NeuralNetworks/imgNNExample.png)
+
+the drawbacks of this approach is that there will a lot of weights for us to calculate especially when the image is large. Perhaps the major drawback is that by flattening the pixels into a single input layer, we lose the image structure like curves, lines, and other features.
+
+## Image Convolution:
+
+Applying a filter that adds each pixel value of an image to its neighbors, weighted accoridng to a kernel matrix.
+
+Image Convolution Example:  
+![kernelMatrix](images/5_NeuralNetworks/kernelMatrix.png)
+
+Using the kernel matrix in the top right, we can apply a filter to the image on the left. Since the kernel is a 3x3 grid, we can start by applying the filter to the top left 3x3 on the image. Since there are 4 3x3's on a 4x4 grid, we can create a 2x2 grid that will hold our filtered values:
+
+|  |  |
+|--|--|
+|f<sub>1</sub>|f<sub>2</sub>|
+|f<sub>3</sub>|f<sub>4</sub>|
+
+To get the value of f<sub>1</sub>, we match each value in the 4x4, 3x3 grid, to the value in the kernel matrix. Then we multiply them together and add it to the result of doing the same for all other values in the matrix:
+
+f<sub>1</sub>:  
+10(0) + 20(-1) + 30(0) + 10(-1) + 20(5) + 30(-1) + 20(0) + 30(-1) + 40(0) = 10
+
+f<sub>2</sub>:  
+20(0) + 30(-1) + 40(0) + 20(-1) + 30(5) + 40(-1) + 30(0) + 40(-1) + 50(0) = 20
+
+f<sub>3</sub>:  
+10(0) + 20(-1) + 30(0) + 20(-1) + 30(5) + 40(-1) + 20(0) + 30(-1) + 40(0) = 40
+
+f<sub>4</sub>:  
+20(0) + 30(-1) + 40(0) + 30(-1) + 40(5) + 50(-1) + 30(0) + 40(-1) + 50(0) = 50
+
+Here is the updated 2x2 grid:
+
+|  |  |
+|--|--|
+|10|20|
+|40|50|
+
+### -1/8 Kernel Matrix:
+
+Why might the above be useful? Let's take another example of a kernel matrix that looks like this:
+
+|  |  |  |
+|--|--|--|
+|-1|-1|-1|
+|-1|&nbsp;8|-1|
+|-1|-1|-1|
+
+And a image that looks like this:
+
+|  |  |  |
+|--|--|--|
+|20|20|20|
+|20|20|20|
+|20|20|20|
+
+When we apply the filter, the value we get is 0. What this tells us is that there isn't much variation in that section of the image. If we were to take another section where the middle value was higher, that would mean that there is variation.
+
+## Pooling:
+
+Reducing the size of an input by sampling from regions in the input.
+
+## Max-Pooling:
+
+Pooling by choosing maximum value in a particular region.
+
+![mp1](images/5_NeuralNetworks/mp1.png) ![mp2](images/5_NeuralNetworks/mp2.png)  
+![mp3](images/5_NeuralNetworks/mp3.png) ![mp4](images/5_NeuralNetworks/mp4.png)
+
+Now, we have a smaller representation of the original image and we are able to exclude specific pixels; meaning we don't care about which exact pixels are filled with what color.
+
+## Convolutional Neural Networks:
+
+Neural Networks that use convolution, usually for analyzing images.
+
+- Start with image
+- Use convolution to extract specific feature maps
+  - Each map represent a unique characteristic i.e. curves, edges, shapes, etc...
+  - Train neural networks to figure out values of kernel matrix
+- Apply Pooling Algorithm to scale image down i.e. max-pooling, average pooling
+- Flatten into the neural network as input 
+  
+![convolutionalNetwork](images/5_NeuralNetworks/convolutionalNetwork.png)
+
+We can improve this approach even more by performing convolution and pooling more than one time. This will allow us to shrink the input size to the network as well as identify types of features. For example,
+
+First Convolution & Pooling:
+- Low-level features
+  - edges
+  - curves
+  - shapes
+
+Second Convolution & Pooling:
+- High-level features
+  - objects
+
+Although we can have a bunch of layers and a bunch of units that try and classify images, convolutional networks and techniques come in quite handy in terms of optimization. On a higher level, when humans classify images, we don't look at every pixel to see if they're matching. Generally, we identify curves and then colors and maybe some other features depending on what we are trying to find. Convolution algorithms try to do the same thing.
