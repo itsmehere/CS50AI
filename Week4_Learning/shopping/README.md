@@ -30,6 +30,9 @@ Next, take a look at `shopping.py`. The `main` function loads data from a CSV sp
 
 ## Other Links:
 
-Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)  
-Data set provided by [Sakar, C.O., Polat, S.O., Katircioglu, M. et al. Neural Comput & Applic (2018)](https://link.springer.com/article/10.1007%2Fs00521-018-3523-0)  
+Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)   
 [Original Problem Page](https://cs50.harvard.edu/ai/2020/projects/4/shopping/)
+
+## Acknowledgements
+
+Data set provided by [Sakar, C.O., Polat, S.O., Katircioglu, M. et al. Neural Comput & Applic (2018)](https://link.springer.com/article/10.1007%2Fs00521-018-3523-0) 
