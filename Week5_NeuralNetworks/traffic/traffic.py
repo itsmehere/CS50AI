@@ -58,8 +58,24 @@ def load_data(data_dir):
     be a list of integer labels, representing the categories for each of the
     corresponding `images`.
     """
-    raise NotImplementedError
+    # Hold the images and labels
+    images = []
+    labels = []
 
+    # Go through the different sign types under gtsrb
+    for signType in range(NUM_CATEGORIES):
+        # The directory for the given signtype
+        directory = os.path.join(data_dir, str(signType))
+
+        for img in os.listdir(directory):
+            # Get the images and resize to IMG_WIDTH x IMG_HEIGHT
+            trafficSign = cv2.imread(os.path.join(directory, img))
+            resizedSign = cv2.resize(trafficSign, (IMG_WIDTH, IMG_HEIGHT))
+
+            # Add the image and label to their respective lists
+            images.append(resizedSign)
+            labels.append(signType)
+            
 
 def get_model():
     """
