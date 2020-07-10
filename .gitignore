@@ -128,5 +128,5 @@ dmypy.json
 .vscode
 
 # Ignore German Traffic Sign Recognition Benchmark (GTSRB)
-# gtsrb/
 Week5_NeuralNetworks/traffic/gtsrb
+Week5_NeuralNetworks/traffic/gtsrb-small
