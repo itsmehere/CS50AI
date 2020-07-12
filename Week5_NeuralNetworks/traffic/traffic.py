@@ -75,7 +75,8 @@ def load_data(data_dir):
             # Add the image and label to their respective lists
             images.append(resizedSign)
             labels.append(signType)
-            
+
+    return (images, labels)
 
 def get_model():
     """
@@ -83,7 +84,41 @@ def get_model():
     `input_shape` of the first layer is `(IMG_WIDTH, IMG_HEIGHT, 3)`.
     The output layer should have `NUM_CATEGORIES` units, one for each category.
     """
-    raise NotImplementedError
+    # TensorFlow Model
+    tfModel = tf.keras.models.Sequential([
+        # Convolutional layer that learns 50 filters using a 3x3 kernel
+        tf.keras.layers.Conv2D(
+            50, (2, 2), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
+        ),
+        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+
+        # Second Convolutional layer
+        tf.keras.layers.Conv2D(
+            50, (2, 2), activation="relu",
+        ),
+
+        # Flatten Units
+        tf.keras.layers.Flatten(),
+
+        # Add Hidden Layers
+        tf.keras.layers.Dense(50, activation="relu"),
+        tf.keras.layers.Dense(50, activation="relu"),
+        tf.keras.layers.Dense(NUM_CATEGORIES, activation="relu"),
+        
+        # Dropout 25% of the data
+        tf.keras.layers.Dropout(0.25),
+
+        # Add Output layer for different traffic signs
+        tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
+    ])
+
+    tfModel.compile(
+        optimizer="adam",
+        loss="categorical_crossentropy",
+        metrics=["accuracy"]
+    )
+
+    return tfModel
 
 
 if __name__ == "__main__":
