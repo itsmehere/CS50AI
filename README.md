@@ -26,9 +26,9 @@ CS50's Introduction to Artificial Intelligence with Python
 - [Shopping](https://github.com/itsmehere/CS50AI/tree/master/Week4_Learning/shopping)
 - [Nim](https://github.com/itsmehere/CS50AI/tree/master/Week4_Learning/nim)
 
-## Week 5 - Neural Networks:
+## [Week 5 - Neural Networks:](https://github.com/itsmehere/CS50AI/blob/master/LectureNotes/Week5_NeuralNetworks.md) ✔️
 
-- Traffic
+- [Traffic](https://github.com/itsmehere/CS50AI/tree/master/Week5_NeuralNetworks/traffic)
 
 ## Week 6 - Language:
 
