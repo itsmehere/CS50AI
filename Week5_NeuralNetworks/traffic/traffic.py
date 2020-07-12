@@ -62,6 +62,8 @@ def load_data(data_dir):
     images = []
     labels = []
 
+    print("Loading Data from GTSRB...")
+
     # Go through the different sign types under gtsrb
     for signType in range(NUM_CATEGORIES):
         # The directory for the given signtype
@@ -86,29 +88,31 @@ def get_model():
     """
     # TensorFlow Model
     tfModel = tf.keras.models.Sequential([
-        # Convolutional layer that learns 50 filters using a 3x3 kernel
+        # Convolutional layer that learns 30 3x3 filters
         tf.keras.layers.Conv2D(
-            50, (2, 2), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
+            30, (3, 3), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
         ),
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.MaxPooling2D(pool_size=(2,2)),
 
-        # Second Convolutional layer
+        # Second convolutional layer that learns 24 2x2 filters
         tf.keras.layers.Conv2D(
-            50, (2, 2), activation="relu",
+            24, (2, 2), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
         ),
+        tf.keras.layers.MaxPooling2D(pool_size=(2,2)),
 
-        # Flatten Units
+        # Flatten units into a single layer
         tf.keras.layers.Flatten(),
 
-        # Add Hidden Layers
-        tf.keras.layers.Dense(50, activation="relu"),
-        tf.keras.layers.Dense(50, activation="relu"),
-        tf.keras.layers.Dense(NUM_CATEGORIES, activation="relu"),
-        
-        # Dropout 25% of the data
-        tf.keras.layers.Dropout(0.25),
+        # Add a hidden layer w/ dropout and 128 units (hidden)
+        tf.keras.layers.Dense(250, activation="relu"),
+        tf.keras.layers.Dense(250, activation="relu"),
+        tf.keras.layers.Dense(130, activation="relu"),
+        tf.keras.layers.Dense(130, activation="relu"),
+        tf.keras.layers.Dense(230, activation="relu"),
+        # tf.keras.layers.Dense(128, activation="relu"),
+        tf.keras.layers.Dropout(0.3),    # Helps with over fitting, dropout half data
 
-        # Add Output layer for different traffic signs
+        # Output layer w/ output units for all NUM_CATEGORIES categories
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
     ])
 
