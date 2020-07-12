@@ -103,16 +103,15 @@ def get_model():
         # Flatten units into a single layer
         tf.keras.layers.Flatten(),
 
-        # Add a hidden layer w/ dropout and 128 units (hidden)
+        # Add a hidden layers and dropout 30% of the data
         tf.keras.layers.Dense(250, activation="relu"),
         tf.keras.layers.Dense(250, activation="relu"),
         tf.keras.layers.Dense(130, activation="relu"),
         tf.keras.layers.Dense(130, activation="relu"),
         tf.keras.layers.Dense(230, activation="relu"),
-        # tf.keras.layers.Dense(128, activation="relu"),
-        tf.keras.layers.Dropout(0.3),    # Helps with over fitting, dropout half data
+        tf.keras.layers.Dropout(0.3),
 
-        # Output layer w/ output units for all NUM_CATEGORIES categories
+        # Output layer with NUM_CATEGORIES signs
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
     ])
 
