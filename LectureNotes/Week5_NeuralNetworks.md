@@ -232,7 +232,7 @@ Neural Networks that use convolution, usually for analyzing images.
   
 ![convolutionalNetwork](images/5_NeuralNetworks/convolutionalNetwork.png)
 
-We can improve this approach even more by performing convolution and pooling more than one time. This will allow us to shrink the input size to the network as well as identify types of features. For example,
+We can improve this approach even more by performing convolution and pooling more than one time. This will allow us to shrink the input size to the network as well as identify different types of features. For example,
 
 First Convolution & Pooling:
 - Low-level features
