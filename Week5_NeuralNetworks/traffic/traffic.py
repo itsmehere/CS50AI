@@ -105,10 +105,10 @@ def get_model():
 
         # Add a hidden layers and dropout 30% of the data
         tf.keras.layers.Dense(250, activation="relu"),
+        tf.keras.layers.Dense(130, activation="relu"),
+        tf.keras.layers.Dense(130, activation="relu"),
+        tf.keras.layers.Dense(130, activation="relu"),
         tf.keras.layers.Dense(250, activation="relu"),
-        tf.keras.layers.Dense(130, activation="relu"),
-        tf.keras.layers.Dense(130, activation="relu"),
-        tf.keras.layers.Dense(230, activation="relu"),
         tf.keras.layers.Dropout(0.3),
 
         # Output layer with NUM_CATEGORIES signs
