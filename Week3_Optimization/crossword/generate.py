@@ -173,6 +173,7 @@ class CrosswordCreator():
                 # Since the first var in pair was revised, make sure the neighbors of that variable are still arc-consistent
                 for neighbor in self.crossword.neighbors(pair[0]):
                     pairsToProcess.add((neighbor, pair[0]))
+                    
         return True
 
     def assignment_complete(self, assignment):
