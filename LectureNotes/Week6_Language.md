@@ -110,3 +110,26 @@ nltk also has the ability to show us all possible sentence structures, that is t
 OR:
 
 ![dog2](images/Week6_Language/../6_Language/dog2.png)
+
+## _n_-gram
+
+A contiguous sequence of _n_ items from a sample of text.
+
+- Unigram: A continuos sequence of 1 item from a sample of text - _n_ = 1.
+- Bigram: A continuos sequence of 2 items from a sample of text - _n_ = 2.
+- Trigram: A continuos sequence of 3 items from a sample of text - _n_ = 3.
+- Character _n_-gram: A contiguous sequence of _n_ characters form a sample text.
+- Word _n_-gram - A contiguous sequence of _n_ words form a sample text.
+
+Ex. Trigrams in "I'm learning a lot in CS50AI."
+
+1) "I'm learning a"
+2) "learning a lot"
+3) "a lot in"
+4) "lot in CS50AI"
+
+Why might this be useful? Often when computers analyze text, they don't look at the whole text at once. Even we humans read word by word or phrase by phrase. With the above approach there is a likelihood that the AI has never seen this exact text before but it could have seen phrases like "learning a lot." 
+
+## Tokenization:
+
+The task of splitting a sequence of characters into pieces (tokens)
