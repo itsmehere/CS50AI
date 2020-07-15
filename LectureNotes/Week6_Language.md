@@ -53,3 +53,60 @@ Verb Phrase: A verb followed by a noun phrase
 A Sentence: Noun phrase followed by a verb phrase
 
 ![sent](images/Week6_Language/../6_Language/sent.png)
+
+## Natural Language Took Kit (nltk):
+
+A useful python library for natural language processing.
+
+```python
+import nltk
+
+grammar = nltk.CFG.fromstring("""
+    S -> NP VP
+
+    NP -> D N | N
+    VP -> V | V NP
+
+    D -> "the" | "a"
+    N -> "she" | "city" | "car"
+    V -> "saw" | "walked"
+""")
+
+parser = nltk.ChartParser(grammar)
+
+sentence = input("Sentence: ").split()
+try:
+    for tree in parser.parse(sentence):
+        tree.pretty_print()
+        tree.draw()
+except ValueError:
+    print("No parse tree possible.")
+```
+As a simple example, running the above code with input "she walked" would give us the output:
+
+![nltkOutput](images/Week6_Language/../6_Language/nltkOutput.png)
+
+This is still a very basic example but we can start to see how this process can get complicated very quickly. If we were to increase the grammar knowledge, more sentences and sentence structures can be formed:
+
+```
+S -> NP VP
+
+AP -> A | A AP
+NP -> N | D NP | AP NP | N PP
+PP -> P NP
+VP -> V | V NP | V NP PP
+
+A -> "big" | "blue" | "small" | "dry" | "wide"
+D -> "the" | "a" | "an"
+N -> "she" | "city" | "car" | "street" | "dog" | "binoculars"
+P -> "on" | "over" | "before" | "below" | "with"
+V -> "saw" | "walked"
+```
+
+nltk also has the ability to show us all possible sentence structures, that is to say, the sentence "she saw a dog with binoculars" can be represented as:
+
+![dog1](images/Week6_Language/../6_Language/dog1.png)
+
+OR:
+
+![dog2](images/Week6_Language/../6_Language/dog2.png)
