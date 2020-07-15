@@ -37,5 +37,4 @@ CS50's Introduction to Artificial Intelligence with Python
 
 #### Note:
 
-- All [lectureNotes](https://github.com/itsmehere/CS50AI/tree/master/LectureNotes) are completely written by me. However, the problem descriptions that are in each folder are taken from the CS50AI pages.
 - My [Youtube Channel](https://www.youtube.com/channel/UCvZ2dmXEZz8MyR7WrZI2oWQ)
