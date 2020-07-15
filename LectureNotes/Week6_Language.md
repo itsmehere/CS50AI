@@ -133,3 +133,11 @@ Why might this be useful? Often when computers analyze text, they don't look at 
 ## Tokenization:
 
 The task of splitting a sequence of characters into pieces (tokens)
+
+- Word tokenization: the task of splitting a sequence of characters into words.
+
+## Markov Models:
+
+We've seen markov models before and we can use them to predict words that might appear in a sentence. For example, each unit(or previous _x_ units) can predict what the value of the following unit will be based on tokenization information.
+
+![munits](images/Week6_Language/../6_Language/markovUnits.png)
