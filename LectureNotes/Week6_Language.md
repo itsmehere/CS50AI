@@ -178,7 +178,7 @@ We can further simplify the above equation because we aren't exactly looking for
 
 _P_(😃, "My", "grandson", "loved", "it") = _P_(😃)_P_("My" | 😃)_P_("grandson" | "My", 😃), etc...
 
-Now, this approach raises a few concerns. You can imagine if we wanted to find out _P_("grandson") it would be quite hard and aribitrary to do that just being given "My" and 😃. Instead, we can treat each word as a separapte probability whic means that the probability of "grandson" being in the sentence if it's 😃 won't change even if other words are present.
+Now, this approach raises a few concerns. You can imagine if we wanted to find out _P_("grandson") it would be quite hard and aribitrary to do that just being given "My" and 😃. Instead, we can treat each word as a separapte probability which means that the probability of "grandson" being in the sentence if it's 😃 won't change even if other words are present.
 
 _P_(😃, "My", "grandson", "loved", "it") is naively proportional to _P_(😃)_P_("My" | 😃)_P_("grandson" | 😃)_P_("loved" | 😃), etc...
 
@@ -219,3 +219,7 @@ Adding a value _α_ to each value in our distribution to smooth the data.
 ### Laplace Smoothing:
 
 Adding 1 to each value in our distribution. Pretending we've seen each vale one more time than we actually have.
+
+### Summary:
+
+The main goal of naive bayes is to ignore words that appear to be equally likely in both positive and negative sentences. What really makes the difference when it comes to classification is when a probability for one word is much higher for one sentiment rather than another.
