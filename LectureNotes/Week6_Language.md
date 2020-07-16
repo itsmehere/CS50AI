@@ -182,7 +182,7 @@ Now, this approach raises a few concerns. You can imagine if we wanted to find o
 
 _P_(😃, "My", "grandson", "loved", "it") is naively proportional to _P_(😃)_P_("My" | 😃)_P_("grandson" | 😃)_P_("loved" | 😃), etc...
 
-### Calculating Terms:
+### Calculation:
 
 _P_(😃) = number of positive samples / number of total samples.  
 _P_("loved" | 😃) = number of positive samples with "loved" / number of positive samples
@@ -191,3 +191,31 @@ _P_("loved" | 😃) = number of positive samples with "loved" / number of positi
 
 Sentence:  
 _P_(😃)_P_("My" | 😃)_P_("grandson" | 😃)_P_("loved" | 😃)_P_("it" | 😃)
+
+Known Probabilites:
+
+| 😃 | 🙁 |
+|-----|----|
+| 0.49| 0.52|
+
+| | 😃 | 🙁 |
+|----|-----|----|
+| my | 0.30| 0.20|
+| grandson | 0.01| 0.02|
+| loved | 0.32| 0.08|
+| it | 0.30| 0.40|
+
+Using the able probabilites we can compute the joint probability for the above sentence which turns out to be: 😃 - 0.00014112. Alone, this number doesn't give us much information so we then compute a similar joint probability but multiply all the negative values instead. This gives us the value 🙁 - 0.00006528. After normalizing the values, we get:
+
+😃 = 0.6837
+🙁 = 0.3183
+
+We are 68.37% confident that the above sentence is positive. Once again, there are downsides to this approach. Let's say the probability of "grandson" occuring in a positive sentence was 0.00. Our final probability would result in 0 which isn't exactly accurate because we are essentially ignoring all the other probabilities. Below are some possible solutions.
+
+### Additive Smoothing:
+
+Adding a value _α_ to each value in our distribution to smooth the data.
+
+### Laplace Smoothing:
+
+Adding 1 to each value in our distribution. Pretending we've seen each vale one more time than we actually have.
