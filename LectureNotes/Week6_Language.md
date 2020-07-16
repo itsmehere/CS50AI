@@ -146,16 +146,48 @@ We've seen markov models before and we can use them to predict words that might 
 
 Classifying text into categories.
 
-Example: Given words in an email classify the email as either words or spam.
-
-![inboxSpam](images/Week6_Language/../6_Language/inboxSpam.png)
-
 Example: Given a sentence, is it positive or negative.
 - 😃 "My grandson loved it! So much fun!"
 - 🙁 "Product broke after a few days."
 - 😃 "One of the best games I've played in a long time."
 - 🙁 "Kind of cheap and flimsy, not worth it."
 
+Example: Given words in an email classify the email as either words or spam.
+
+![inboxSpam](images/Week6_Language/../6_Language/inboxSpam.png)
+
 ### Bag-of-Words Model:
 
 Model that represents text as an unordered collection of words. In this case, ignore sentence meaning and just search for key words.
+
+## Naive Bayes:
+
+Recall that Bayes' Rule is:
+
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=$P(b | a) = \frac{P(a | b)*P(b)}{P(a)}$">
+</p>
+
+Given a comment, we want to be able to say: what is the probability it is positive - _P_(😃) and what is the probability it is negative - _P_(🙁). We can formulate this using conditional probability by saying _P_(😃 | "My grandson love it") or, _P_(😃 | "My", "grandson", "loved", "it"). In this case, _b_ = 😃 and _a_ = "My", "grandson", "loved", "it".
+
+**Using Bayes' Rule,** 
+
+_P_(😃 | "My", "grandson", "loved", "it") = _P_("My", "grandson", "loved", "it" | 😃)_P_(😃) / _P_("My", "grandson", "loved", "it")
+
+We can further simplify the above equation because we aren't exactly looking for exact probabilities. Since the denominator is the same regardless of + or -, we can formulat it using joint probabilities:
+
+_P_(😃, "My", "grandson", "loved", "it") = _P_(😃)_P_("My" | 😃)_P_("grandson" | "My", 😃), etc...
+
+Now, this approach raises a few concerns. You can imagine if we wanted to find out _P_("grandson") it would be quite hard and aribitrary to do that just being given "My" and 😃. Instead, we can treat each word as a separapte probability whic means that the probability of "grandson" being in the sentence if it's 😃 won't change even if other words are present.
+
+_P_(😃, "My", "grandson", "loved", "it") is naively proportional to _P_(😃)_P_("My" | 😃)_P_("grandson" | 😃)_P_("loved" | 😃), etc...
+
+### Calculating Terms:
+
+_P_(😃) = number of positive samples / number of total samples.  
+_P_("loved" | 😃) = number of positive samples with "loved" / number of positive samples
+
+**Let's calculate the probabilites**
+
+Sentence:  
+_P_(😃)_P_("My" | 😃)_P_("grandson" | 😃)_P_("loved" | 😃)_P_("it" | 😃)
