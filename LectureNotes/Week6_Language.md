@@ -141,3 +141,21 @@ The task of splitting a sequence of characters into pieces (tokens)
 We've seen markov models before and we can use them to predict words that might appear in a sentence. For example, each unit(or previous _x_ units) can predict what the value of the following unit will be based on tokenization information.
 
 ![munits](images/Week6_Language/../6_Language/markovUnits.png)
+
+## Text Categorization:
+
+Classifying text into categories.
+
+Example: Given words in an email classify the email as either words or spam.
+
+![inboxSpam](images/Week6_Language/../6_Language/inboxSpam.png)
+
+Example: Given a sentence, is it positive or negative.
+- 😃 "My grandson loved it! So much fun!"
+- 🙁 "Product broke after a few days."
+- 😃 "One of the best games I've played in a long time."
+- 🙁 "Kind of cheap and flimsy, not worth it."
+
+### Bag-of-Words Model:
+
+Model that represents text as an unordered collection of words. In this case, ignore sentence meaning and just search for key words.
