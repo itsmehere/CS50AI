@@ -223,3 +223,38 @@ Adding 1 to each value in our distribution. Pretending we've seen each vale one 
 ### Summary:
 
 The main goal of naive bayes is to ignore words that appear to be equally likely in both positive and negative sentences. What really makes the difference when it comes to classification is when a probability for one word is much higher for one sentiment rather than another.
+
+## Information Retrieval:
+
+The task of finding relevant documents in response to a user query
+
+### Topic Modeling:
+
+Models for discovering the topics for a set of documents
+
+### Term Frequency:
+
+Number of times a term appears in a documents
+
+This might not provide us with an accurate subject of a document simple because english grammar words(and, but, a, of, etc...) will most likely be the most used words regardless of the subject.
+
+- Function words - words that have little meaning on their own but are used to grammatically connect other words
+  - E.g. the, and, am, is, yet, which, etc...
+- Context words - words that carry meaning independently
+  - E.g. algorith, category, computer, etc...
+
+To solve this problem, we can print out the most common words that are not in a list of function words. That way, we eliminate words that don't give us much meaning. However, even this poses a couple concerns. In a series like Harry Potter, it is probably safe to assume that the words "Harry" and "Hermione" and "Ron" might appear the most often in each book but it still isn't telling us the difference between them. What we really want is to find words that occur more frequently in one document but less frequently in other documents.
+
+### Inverse Document Frequency:
+
+Measure of how common or rare a words is across documents
+
+Calculated using:
+
+<img src="https://latex.codecogs.com/gif.latex?log%5Cfrac%7BTotalDocuments%7D%7BNumDocumentsContaining%28word%29%7D">
+
+As the denominator(num documents that contain word) increases, the argument(total/num docs) to the logarithm decreases making the inverse document frequency smaller. If the argument equals 1, that word has an inverse argument frequency of 0.
+
+## tf-idf:
+
+Ranking of what words are important in a document by multiplying term frequency(TF) by inverse document frequency(IDF)
