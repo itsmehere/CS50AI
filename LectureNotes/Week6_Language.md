@@ -255,6 +255,51 @@ Calculated using:
 
 As the denominator(num documents that contain word) increases, the argument(total/num docs) to the logarithm decreases making the inverse document frequency smaller. If the argument equals 1, that word has an inverse argument frequency of 0.
 
-## tf-idf:
+### tf-idf:
 
 Ranking of what words are important in a document by multiplying term frequency(TF) by inverse document frequency(IDF)
+
+## Information Extraction:
+
+The task of extracting information from documents
+
+**Examples:**
+
+"<span style="color: #1a73e8;">When **Facebook** was founded in **2004**</span>, it began with a seemingly innocous mission: to connect friends. Some seven years and 800 million users later, the social network has taken over most aspects of our personal and professional lives, and is fast becoming the dominant communication platform of the future."  
+-Harvard Business Review, 2011
+
+"Remember, back <span style="color: #1a73e8;">when **Amazon** was founded in **1994**</span>, most people tought his idea to sell books over this thing called the internet was crazy. A lot of people had never even hard of the internet."  
+-Business Insider, 2018
+
+### Concept:
+
+Using text templates like the part highlighted above, we can let our AI search the web and try and find out useful information that we may be looking for.
+
+When {company} was founded in {year}, ...
+
+Obviously, websites might write their description of the above with a different template and of course, the AI would fail. However, we can give the AI data rather than specific templates. Something like "Amazon: 1994" and "Facebook: 2004". Now the AI can look to see where "Amazon" & "1994" showed up together and where "Facebook" & "2004" showed up together and discover templates for itself.
+
+## Word Representation:
+
+Represent the meaning of a word so the AI can understand it
+
+### One-Hot Representation:
+
+Representation of meaning as a vector with a single 1, and with other values as 0.
+
+"He wrote a book."
+
+he - [1, 0, 0, 0]  
+wrote - [0, 1, 0, 0]  
+a - [0, 0, 1, 0]  
+book - [0, 0, 0, 1]
+
+Now for the drawbacks: Imagine a dictionary with 50,000 words. We would have enormously large vectors as well as the fact that words would have completely distinct vectors despite similar meaning.
+
+### Distribution Representation:
+
+Representation of meaning distributed across multiple values
+
+![distRep](images/Week6_Language/../6_Language/distRep.png)
+
+We can define a word in terms of the words that show up around it; based on the context in which the words appears.
