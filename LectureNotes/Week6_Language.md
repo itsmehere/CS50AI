@@ -294,7 +294,7 @@ wrote - [0, 1, 0, 0]
 a - [0, 0, 1, 0]  
 book - [0, 0, 0, 1]
 
-Now for the drawbacks: Imagine a dictionary with 50,000 words. We would have enormously large vectors as well as the fact that words would have completely distinct vectors despite similar meaning.
+Now for the drawbacks: Imagine a dictionary with 50,000 words. We would have enormously large vectors as well as the fact that words would have completely distinct vectors despite having similar meaning.
 
 ### Distribution Representation:
 
@@ -303,3 +303,61 @@ Representation of meaning distributed across multiple values
 ![distRep](images/Week6_Language/../6_Language/distRep.png)
 
 We can define a word in terms of the words that show up around it; based on the context in which the words appears.
+
+## Word2Vec:
+
+Model for generating word vectors
+
+### Skip-Gram architecture:
+
+Neural Network architecture for predicting context words given a target word. 
+
+Given traning data of words and what other words appear in context, our AI can try and predict similar words. For example, given the word "lunch" try and predict what words are going to appear around it i.e. "For", "he", "she", "ate", etc...
+
+![w2v](images/Week6_Language/../6_Language/word2vec.png)
+
+The general idea here is that if two words are similar, their weights will be similar. This essentially allows us to use the weights themselves as the vector values. More generally, start with a random arrangement of words:
+
+![wordSpread](images/Week6_Language/../6_Language/spreadWords.png)
+
+As the neural network learns, we can start grouping words that have similar context words and meanings.
+
+![groupedWords](images/Week6_Language/../6_Language/groupedWords.png)
+
+Now, given two vectors that represent words, we can subtract them to find out what is the distance or relationship between those two words. In practice, it might not make sense to "subtract" words but since the computer represents them as numbers, we can do so. Then we can try and predict similar words for something else, say "woman" by adding the difference in vectors from "king" and "man".
+
+![subVec](images/Week6_Language/../6_Language/subVec.png)
+
+### Example 1:
+
+Vector that takes us from "france" to "paris"
+```
+words["paris"] - words["france"]
+```
+
+Add to england to get new vector. Find closest word given that vector
+```
+words["paris"] - words["france"] + words["england"]
+```
+
+Amazingly, we get "london"
+```
+'london'
+```
+
+### Example 2:
+
+Vector that takes us from "school" to "teacher"
+```
+words["teacher"] - words["school"]
+```
+
+Add to "hospital" to get new vector. Find closest word given that vector
+```
+words["paris"] - words["france"] + words["hospital"]
+```
+
+Amazingly, we get "nurse"
+```
+'nurse'
+```
