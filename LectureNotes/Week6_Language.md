@@ -234,7 +234,7 @@ Models for discovering the topics for a set of documents
 
 ### Term Frequency:
 
-Number of times a term appears in a documents
+Number of times a term appears in a document
 
 This might not provide us with an accurate subject of a document simply because English grammar words(and, but, a, of, etc...) will most likely be the most used words regardless of the doc subject.
 
