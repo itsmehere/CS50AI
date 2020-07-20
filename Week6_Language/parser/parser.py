@@ -84,8 +84,31 @@ def np_chunk(tree):
     whose label is "NP" that does not itself contain any other
     noun phrases as subtrees.
     """
-    return []
+    npChunks = []
 
+    for part in tree:
+        if part.label() == "NP":
+            # Get a list of the subtrees and remove the current tree
+            subtrees = list(part.subtrees())
+            subtrees.remove(part)
+            
+            # If the current NP tree contains no NP's, add to the list
+            if not containsNP(subtrees):
+                npChunks.append(part)
+        else:
+            # If the current tree isn't an NP tree, recursively call np_chunk
+            if part.height() > 2:
+                npChunks.extend(np_chunk(part))
+
+    return npChunks
+
+# Checks to see if a current tree has NP's underneath it
+def containsNP(subtrees):
+    for s in subtrees:
+        if s.label() == "NP":
+            return True
+
+    return False
 
 if __name__ == "__main__":
     main()
