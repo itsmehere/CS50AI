@@ -72,7 +72,9 @@ def tokenize(document):
     tokDoc = []
     tokenized = nltk.word_tokenize(document.lower())
     
+    # Go through words in tokenized document
     for word in tokenized:
+        # If the word is not a stopword or has no punctuation, add to the tokenized Document list
         if word not in nltk.corpus.stopwords.words("english"):
             if noPunctuation(word):
                 tokDoc.append(word)
@@ -80,12 +82,14 @@ def tokenize(document):
     return tokDoc
 
 
+# Checks to see if a word has any punctuation in it
 def noPunctuation(word):
     for c in word:
         if c in string.punctuation:
             return False
 
     return True
+
 
 def compute_idfs(documents):
     """
@@ -95,14 +99,15 @@ def compute_idfs(documents):
     Any word that appears in at least one of the documents should be in the
     resulting dictionary.
     """
-    
     idfs = {}
     words = set()
 
+    # Create a set of all words in all documents so words don't repeat
     for document in documents:
         for word in documents[document]:
             words.add(word)
 
+    # Loop through all words and calculate idf values
     for word in words:
         numDocs = 0
 
@@ -110,6 +115,7 @@ def compute_idfs(documents):
             if word in documents[document]:
                 numDocs += 1
         
+        # Divide the number of total documents by the number of documents word appears in
         word_idf = len(documents.keys()) / numDocs
         idfs[word] = math.log(word_idf)
 
@@ -129,18 +135,22 @@ def top_files(query, files, idfs, n):
     for file in files:
         total = 0
 
+        # Calculate tfidf values for each document
         for word in query:
-            if word in files[file] and word in idfs:
+
+            # If the word is in the file, multiply the number of times it appears in the file by its idf value
+            if word in files[file]:
                 tf = files[file].count(word)
-                tfidf = tf * idfs[word]
+                total += tf * idfs[word]
 
-                total += tfidf
-
+        # Assign the document its total score
         docScores[file] = total
 
+    # Sort the documents based on their score from greatest to least
     docScores = sorted(docScores.items(), key=lambda x: x[1], reverse=True)
     docScores = docScores[:n]
     
+    # Extract file names and return the best matching files
     for file in docScores:
         topFiles.append(file[0])
 
@@ -159,26 +169,32 @@ def top_sentences(query, sentences, idfs, n):
     topSentences = {}
 
     for sentence in sentences.keys():
+        # Get sum of idf values for each word and assign it to be the sentences's score
         total = 0
 
         for word in query:
             if word in idfs and word in sentences[sentence]:
                 total += idfs[word]
         
+        # Dict that maps a sentence to its summed idf value and query term density value
         topSentences[sentence] = (total, qtd(sentences[sentence], query))
 
+    # Sort sentences based on total idf value and if they're the same, use the qtd value
     topSentences = sorted(topSentences.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
     topSentences = topSentences[:n]
 
+    # Extract sentences from sorted list and return the best matching sentences
     for sent in topSentences:
         topSents.append(sent[0])
 
     return topSents
 
 
+# Calculates the query term density given a word and a sentence
 def qtd(sentence, query):
     numQueryWordsInSen = 0
 
+    # Store the number of times a word in the query also appears in the sentence
     for word in query:
         if word in sentence:
             numQueryWordsInSen += 1
