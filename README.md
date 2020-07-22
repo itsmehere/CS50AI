@@ -30,10 +30,10 @@ CS50's Introduction to Artificial Intelligence with Python
 
 - [Traffic](https://github.com/itsmehere/CS50AI/tree/master/Week5_NeuralNetworks/traffic)
 
-## Week 6 - Language:
+## [Week 6 - Language:](https://github.com/itsmehere/CS50AI/blob/master/LectureNotes/Week6_Language.md) ✔️
 
-- Parser
-- Questions
+- [Parser](https://github.com/itsmehere/CS50AI/tree/master/Week6_Language/parser)
+- [Questions](https://github.com/itsmehere/CS50AI/tree/master/Week6_Language/questions)
 
 #### Note:
 
