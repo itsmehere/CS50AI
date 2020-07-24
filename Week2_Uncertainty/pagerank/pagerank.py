@@ -149,19 +149,16 @@ def iterate_pagerank(corpus, damping_factor):
         tempPageRanks = copy.deepcopy(pageRanks)
 
         for page in tempPageRanks:
-            newPageRank = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, tempPageRanks))
+            pageRanks[page] = ((1 - damping_factor) / len(corpus)) + (damping_factor * iterSum(corpus, page, tempPageRanks))
 
             # Check if a fairly accurate value has been reached
-            if abs(tempPageRanks[page] - newPageRank) < ACCURACY:
-                pageRanks[page] = newPageRank
+            if abs(tempPageRanks[page] - pageRanks[page]) < ACCURACY:
                 numAccuratePages += 1
 
                 # If all pages have accurate values, then exit the process
                 if numAccuratePages == len(tempPageRanks):
                     complete = True
                     break
-            else:
-                pageRanks[page] = newPageRank
 
         # Reset number of accurate pages for next iteration
         numAccuratePages = 0
