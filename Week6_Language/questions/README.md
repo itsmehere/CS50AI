@@ -29,7 +29,5 @@ In the `main` function, we first load the files from the corpus directory into m
 
 ## Other Links:
 
-## Other Links:
-
 Read more about cs50ai [here](https://cs50.harvard.edu/ai/2020/)   
 [Original Problem Page](https://cs50.harvard.edu/ai/2020/projects/6/questions/)
