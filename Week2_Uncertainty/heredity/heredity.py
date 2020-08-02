@@ -168,7 +168,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 
                 geneProb = (p1Prob * (1 - p2Prob) + p2Prob * (1 - p1Prob))
 
-                # The probability that the child have 2 genes with given trait
+                # The probability that the child has 2 genes with given trait
                 jointProb *= PROBS["trait"][childGene][childTrait] * geneProb
 
             elif childGene == 2:
@@ -178,7 +178,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
 
                 geneProb = p1Prob * p2Prob
 
-                # The probability that the child have 2 genes with given trait
+                # The probability that the child has 2 genes with given trait
                 jointProb *= PROBS["trait"][childGene][childTrait] * geneProb
 
             else:
