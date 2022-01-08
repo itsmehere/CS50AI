@@ -129,3 +129,6 @@ dmypy.json
 
 # Ignore German Traffic Sign Recognition Benchmark (GTSRB)
 Week5_NeuralNetworks/traffic/gtsrb
+
+# Mac Stuff
+*.DS_Store
